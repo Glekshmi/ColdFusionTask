@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Q4</title>
+    <link href="../Q4/style/dayStyle.css">
 </head>
 <body>
 
