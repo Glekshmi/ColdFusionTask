@@ -7,9 +7,18 @@
 </head>
 <body>
 
-    <cfset imgId = url.imageId>
-    <cfdump  var="#imgId#" abort>
+    <cfset imgId = url.Id>
+    <cfset imageName = url.imgName>
     <cfset thumbnailPathName = url.thumbnailPathName>
-    <cfdump  var="#thumbnailPathName#">
+    <cfset nwList = []>
+    <cfset nwList = thumbnailPathName>
+    <cfset thumbnailName = listToArray(nwList,"\")>
+    <cfset imgSourcePath = arrayLast(thumbnailName)>
+
+    <cfoutput>
+        <p><a href="component/displayImage.cfc?method=checkId&imgId=#imgId#" class="detailsLink">#imageName#</a></p>
+        <img src="../Q14/assets/thumbnails/#imgSourcePath#" alt="Thumbnail Image">
+    </cfoutput>
+
 </body>
 </html>
