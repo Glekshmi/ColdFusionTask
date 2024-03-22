@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    <link rel="stylesheet" href="./style/page.css">
 </head>
 <body>
     <h1>Login Page</h1>
     <form action="" method="post">
-        <label>Enter Page Name</label>
+        <label>Enter Your Page Name</label>
         <input type="text" name="pageName"><br><br>
         <label>Enter Page Description</label>
         <input type="text" name="desc"><br><br>
