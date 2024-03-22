@@ -9,6 +9,7 @@
 
     <cffunction name="onSessionStart" returnType="boolean" output="false">
         <cfset session.sessVariable = {}>
+        <cfset session.sessVar = false>
         <cfreturn true>
-    </cffunction>  
+    </cffunction> 
 </cfcomponent>
