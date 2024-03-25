@@ -1,20 +1,25 @@
-$(document).ready(function(){
-    $("#checkEmail").click(function() {
-        var email = $("#email").val();
-
+$(document).ready(function() {
+    $('#checkEmail').click(function() {
+        var email = $('#email').val();
+        if (email.trim() === '') {
+            alert('Please enter your email.');
+            return;
+        }
         $.ajax({
-            type: "POST",
-            url: "component/subscribe.cfc",
-            data: { email: email },
-            dataType: "json",
+            url: "component/subscribe.cfc?method=checkMail",
+            type: 'post',
+            data:  {email: email}, 
+            dataType:"json",
             success: function(response) {
-                if (response.message === "exists") {
-                    $("#errorMessage").text("Email id is already there");
-                    $("#submitBtn").prop("disabled", true);
+                if (response.message === "exists"){
+                    alert('Email id is already there');
+                    $('#submitButton').prop('disabled',true);
                 } else {
-                    $("#errorMessage").text("");
-                    $("#submitBtn").prop("disabled", false);
+                    $('#submitButton').prop('disabled',false);
                 }
+            },
+            error: function(xhr, status, error) {
+                $("#submitBtn").prop("disabled", false);
             }
         });
     });
