@@ -1,12 +1,20 @@
 
 function validateForm() {
-       
+    
+    var count=0;
     //Job role validation
     var selectedJobRole = document.getElementById("selectJobRole").value;
     var lblError;
     if (selectedJobRole.trim() === "") {
         document.getElementById("JobRoleError").innerHTML = "This field is required. Please select an option.";
+        //document.getElementById('lblError1').style.color = "red";
+        count++;
+        //validateError();
     } 
+    else{
+        document.getElementById("JobRoleError").innerHTML = "";
+    }
+        
     
     //Date validation
     var Mnth = document.getElementById("month").value;
@@ -19,7 +27,8 @@ function validateForm() {
 
     if (Mnth === "" || Dy === "" || Yr === "") {
         document.getElementById("DateError").innerHTML = "This field is required. Please select a date.";
-        //return false;
+        count++;
+        //validateError();
     } 
     else if (resultDate.match(dateformat)) {
         let operator = resultDate.split('/');
@@ -44,11 +53,14 @@ function validateForm() {
             else
                 if ((leapYear == true) && (day > 29)) {
                     document.getElementById("DateError").innerHTML = "check the date format!";
-                    return false;
+                    count++;
+                    //validateError();
                 }
         }
     } else {
         document.getElementById("DateError").innerHTML = "Invalid date format!";
+        count++;
+        //validateError();
     }
 
     //Portfolio validation
@@ -63,15 +75,22 @@ function validateForm() {
           '(\\#[-a-z\\d_]*)?$', 
         'i'
       );
-    
-    if(websiteUrl === "" ) {
-        document.getElementById("PortfolioError").innerHTML = "This field is required.Please enter website url."; 
-    } 
-    else if(pattern.test(websiteUrl))
-        document.getElementById("PortfolioError").innerHTML = "";
-    else
-        document.getElementById("PortfolioError").innerHTML = "Invalid URL";
 
+    if(websiteUrl === ""){
+        document.getElementById("PortfolioError").innerHTML = "This field is required.Please enter website url."; 
+        count++;
+        //validateError();
+    }
+    else if (pattern.test(websiteUrl)) {
+        document.getElementById("PortfolioError").innerHTML = "";
+        count++;
+    } 
+    else {
+        document.getElementById("PortfolioError").innerHTML = "Invalid URL";
+        count++;
+        //validateError();
+    }
+    
     //First Name validation
     var regexName = /^[a-zA-Z ]{2,30}$/;
     var firstName =  document.getElementById('firstName').value;
@@ -79,11 +98,15 @@ function validateForm() {
 
     if(firstName.trim() === "" || lastName.trim() === ""){
         document.getElementById("NameError").innerHTML = "This is a required field. Please enter name";
+        count++;
+        //validateError();
     }
     else if(regexName.test(firstName) ||  regexName.test(lastName))
         document.getElementById("NameError").innerHTML = "";
     else
         document.getElementById("NameError").innerHTML = "Name should contain alphabets only";
+        count++;
+        //validateError();
 
     
     //Email validation
@@ -91,11 +114,15 @@ function validateForm() {
     var mail =  document.getElementById('email').value;
     if(mail.trim() === ""){
         document.getElementById("MailError").innerHTML = "This is a required field. Please enter email name";
+        count++;
+        //validateError();
     }
     else if(mailRegex.test(mail))
         document.getElementById("MailError").innerHTML = "";
     else
     document.getElementById("MailError").innerHTML = "Invalid email";
+    count++;
+    //validateError();
 
     //phone validation
     var firstPhn = document.getElementById('firstPhn').value;
@@ -108,26 +135,36 @@ function validateForm() {
 
     if(firstPhn === "" || midPhn === "" || lastPhn === ""){
         document.getElementById("PhoneError").innerHTML = "This field cannot be empty. Please enter phone number";
+        count++;
+        //validateError();
     }
     else if (isNaN(phoneNo)) {
         document.getElementById("PhoneError").innerHTML = "This field should contain digits only";
+        count++;
+        //validateError();
     } else if (maxLen < 10 || maxLength > 10) {
         document.getElementById("PhoneError").innerHTML = "Number should contain 10 digits only";
+        count++;
+        //validateError();
     } else {
         document.getElementById("PhoneError").innerHTML = "";
     }
-    return false;
+    
+    if(count==0)
+        return true;
+    else
+        return false;
 }
 
-function validateError()
+/*function validateError()
 {
-    var errMsg = document.getElementById("errorMsg");
+    var errMsg = document.getElementByClass("errorMsg");
     if (errMsg.style.display === "none") {
-        errMsg.style.display = "block";
+        document.getElementById('errorMsg').style.display = "block";
     } else {
-        errMsg.style.display = "none";
-    }
-}
+        document.getElementById('errorMsg').style.display = "none";
+    } onsubmit="return  validateError()"
+}*/ 
 
      
     

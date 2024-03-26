@@ -166,6 +166,9 @@ body{
 .linkText{
     color:#007FAA;
 }
+#errorMsg{
+    display:none !important;
+}
 .errorHeader{
     border: 1px solid red;
     border-radius: 20px;

@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="jobHeader">
-                        <label class="positionQuery">Which position are you applying for? <span class="requiredIcon">*</span></label><br>
+                        <label class="positionQuery" id="lblError">Which position are you applying for? <span class="requiredIcon">*</span></label><br>
                         <select class="selectJobRole" id="selectJobRole">
                             <option value selected="selected"></option>
                             <option value="Interface Designer">Interface Designer</option>
@@ -118,7 +118,6 @@
                     <div class="relocationQuery">
                         <label class="positionQuery">Phone<span class="requiredIcon">*</span></label><br>
                         <div class="dateSection">
-                            
                                  <input type="text" id="firstPhn" name="part1" maxlength="3" size="3" class="calenderBox phnStyle"><span class="hipenIconLeft">-</span>
                                 <input type="text" id="midPhn" name="part2" maxlength="3" size="3" class="calenderBox phnStyle"><span class="hipenIconRight">-</span>
                                 <input type="text" id="lastPhn" name="part3" maxlength="4" size="4" class="calenderBox lastPhnStyle">
