@@ -59,9 +59,11 @@ body{
 .jobHeader, .relocationQuery{
     padding: 6px 1% 9px 1%;
 }
-.jobHeader{
-    width: 368px;
-    
+.jobHeader,.relocationQuery{
+    width: 390px;
+}
+.relocationQuery{
+    margin-bottom : 3px;
 }
 .requiredIcon{
     color:#FF0000;
@@ -87,7 +89,7 @@ body{
     height: 24px;
 }
 .dateBox{
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
 }
 .dateSection{
@@ -96,9 +98,11 @@ body{
 .calenderIcon{
     position: relative;
     top: 6px;
+    margin-left: 4px;
 }
 .dollarBoxStyle{
     width: 85px;
+    margin-right:5px;
 }
 .fnameBoxStyle, .dollarBoxStyle, .lnameBoxStyle, .emailBoxStyle{
     height: 26px;
@@ -200,3 +204,26 @@ body{
 .errorColor{
     color: red;
 }
+.dollarStyle{
+    margin-left: 14px;
+}
+.centStyle{
+    margin-left: 6px;
+}
+.contactInfo{
+    margin-top: 13px;
+    margin-bottom:4px;
+}
+.dateStyle{
+    display: flex;
+}
+.dotIcon{
+    margin-right: 4px;
+}
+.slashStyle{
+    font-size: 17px;
+}
+.dayStyle,.yearStyle{
+    margin-left: 3px;
+}
+

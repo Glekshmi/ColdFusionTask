@@ -43,23 +43,27 @@
                     </div>
                     <div class="relocationQuery">
                         <label class="positionQuery" id="positionQuery" >Are you willing to relocate? <span class="requiredIcon">*</span></label><br>
-                        <input type="radio" name="relocation" value="Yes"><span class="radioValue">Yes</span><br>
+                        <input type="radio" name="relocation" value="Yes" checked><span class="radioValue">Yes</span><br>
                         <input type="radio" name="relocation" value="No"><span class="radioValue">No</span>
                     </div>
                     <div class="relocationQuery" id="dateSection">
                         <label class="positionQuery" id="lblError1">When can you start? <span class="requiredIcon">*</span></label><br>
                         <div class="dateSection">
-                            <span class="dateBox">
+                            <span class="dateBox dateStyle">
                                 <input type="text" id="month" name="month" maxlength="2" size="2" class="calenderBox boxStyle">
                                 <label for="month">MM</label>
                             </span>
-                            <span class="dateBox">
-                                <input type="text" id="day" name="day" maxlength="2" size="2" class="calenderBox boxStyle">
-                                <label for="day">DD</label>
+                            <span class="slashStyle">/
                             </span>
-                            <span class="dateBox">
+                            <span class="dateBox dateStyle">
+                                <input type="text" id="day" name="day" maxlength="2" size="2" class="calenderBox boxStyle">
+                                <label for="day" class="dayStyle" >DD</label>
+                            </span>
+                            <span class="slashStyle">/
+                            </span>
+                            <span class="dateBox dateStyle">
                                 <input type="text" id="year" name="year" maxlength="4" size="4" class="calenderBox lastBoxStyle">
-                                <label for="year">YY</label>
+                                <label for="year" class="yearStyle">YYYY</label>
                             </span>
                             <span>
                                 <img src="./assets/calendar.png" alt="Calendar" id="calendar-icon" width="16" height="16" class="calenderIcon">
@@ -81,18 +85,19 @@
                         <label class="positionQuery">Salary Requirements</label><br>
                         <div class="dateSection">
                             <span class="dateBox">
+                                <label>$</label>
                                 <input type="text" name="dollars" class="calenderBox dollarBoxStyle">
-                                <p><small>Dollars</small></p>
+                                <p><small class="dollarStyle">Dollars</small></p>
                             </span>
-                            <span>.</span>
+                            <span class="dotIcon">.</span>
                             <span class="dateBox">
                                 <input type="text" name="cents" class="calenderBox boxStyle">
-                                <p><small>Cents</small></p>
+                                <p><small class="centStyle">Cents</small></p>
                             </span>
                         </div>
                     </div>
+                    <p class="contactInfo">Your Contact Information</p>
                     <div class="relocationQuery" id="NameSection">
-                        <p>Your Contact Information</p>
                         <label class="positionQuery" id="lblError3">Name<span class="requiredIcon">*</span></label><br>
                         <div class="dateSection">
                             <span class="dateBox">

@@ -27,8 +27,7 @@
             <cfset uploadedFilePath = cffile.serverFile>
             <cfinvokeargument  name="fileInput"  value="#uploadedFilePath#">
         </cfinvoke>
-        
-    </cfif>
+            </cfif>
 
 </body>
 </html>
