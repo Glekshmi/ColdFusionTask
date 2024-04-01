@@ -17,13 +17,9 @@
 
     <cfif structKeyExists(form, "sonDate") && structkeyExists(form, "momDate")>
         <cfinvoke  method="checkAge" component="component/age" returnVariable="sonAge">
-            <cfinvokeargument  name="sonAge"  value="#form.sonAge#">
+            <cfinvokeargument  name="sonAge"  value="#form.sonDate#">
+            <cfinvokeargument  name="momAge"  value="#form.momDate#">
         </cfinvoke>
-        <cfinvoke  method="checkAge" component="component/age" returnVariable="">
-            <cfinvokeargument  name="sonAge"  value="#form.sonAge#">
-        </cfinvoke>
-
-
     </cfif>
 
 </body>

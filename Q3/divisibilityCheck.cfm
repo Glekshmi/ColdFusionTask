@@ -16,10 +16,10 @@
        <cfinvoke  method="readNum" component="component/divisibilityCheck" returnVariable="result">
         <cfinvokeargument  name="numInput"  value="#form.numInput#">
         </cfinvoke>
-        <!---<cfdump  var="#form.numInput#" abort>--->
-        <cfoutput>
-            <p>Result is #result#</p>
-        </cfoutput>
+        <cfoutput>Numbers divisible by 3 are</cfoutput>
+        <cfloop array="#result#" index="index">
+            <cfoutput>#index#</cfoutput>
+        </cfloop>
     </cfif>
     
 </body>
