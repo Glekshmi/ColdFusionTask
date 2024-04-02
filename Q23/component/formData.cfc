@@ -17,17 +17,17 @@
     <cfargument  name="lastPhn" required="true">
 
     <!---joining dates--->
-    <cfset DOB = year&"/"&month&"/"&day>
+    <cfset local.DOB = year&"/"&month&"/"&day>
 
     <!---joining salary--->
-    <cfset salary = dollars&"."&cents>
+    <cfset local.salary = dollars&"."&cents>
     
     <!---joining phone number--->
-    <cfset phone = firstPhn&midPhn&lastPhn>
+    <cfset local.phone = firstPhn&midPhn&lastPhn>
     
     <!---file handling--->
     <cffile action="upload" filefield="fileUpload" destination="#ExpandPath("../assets/uploads/")#"  nameconflict="makeunique">
-    <cfset uploadedFilePath = cffile.serverFile>
+    <cfset local.uploadedFilePath = cffile.serverFile>
     
 
     <cfquery name="insertFormData" result="fetchTableData">

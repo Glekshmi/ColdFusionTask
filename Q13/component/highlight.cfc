@@ -1,20 +1,20 @@
 <cfcomponent>
     <cffunction  name="getWord" access="public" returnType="any">
         <cfargument  name="keyword" type="string" required="true">
-        <cfset checkWord = "the quick brown fox jumps over the lazy dog">
+        <cfset local.checkWord = "the quick brown fox jumps over the lazy dog">
         <cfif arguments.keyword NEQ "">
-            <cfset count = 0>
-            <cfset result = []>
-            <cfset wordList = []>
-            <cfset wordList = checkWord>
-            <cfset separateWord = listToArray(wordList," ")>
-            <cfloop array="#separateWord#" index="index">
+            <cfset local.count = 0>
+            <cfset local.result = []>
+            <cfset local.wordList = []>
+            <cfset local.wordList = checkWord>
+            <cfset local.separateWord = listToArray(local.wordList," ")>
+            <cfloop array="#local.separateWord#" index="index">
                 <cfif index EQ arguments.keyword>
-                    <cfset arrayAppend(result, index)>
-                    <cfset count++>
+                    <cfset arrayAppend(local.result, index)>
+                    <cfset local.count++>
                 </cfif>
             </cfloop>
         </cfif>
-        <cfreturn count>
+        <cfreturn local.count>
     </cffunction>
 </cfcomponent>

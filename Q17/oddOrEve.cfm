@@ -13,9 +13,15 @@
     </form>
 
     <cfif structKeyExists(form, "number") AND isNumeric(form.number)>
-        <cfinvoke  method="checkNumber" component="component/oddOrEve" returnvariable="">
+        <cfinvoke  method="checkNumber" component="component/oddOrEve" returnvariable="result">
             <cfinvokeargument  name="number"  value="#form.number#">
         </cfinvoke>
+        <cfdump  var="#result#">
+       <cfoutput>
+            <cfloop array="#result#" index="index">
+                <p style="color:#index.color#">#index.value#</p>
+            </cfloop>
+       </cfoutput>
     </cfif>
 
 </body>

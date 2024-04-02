@@ -8,7 +8,5 @@
         <cfelse>
             <cfset structInsert(session.sessVariable, arguments.key , arguments.value)>
         </cfif>
-            <cfset local.result = session.sessVariable>
-            <cfreturn local.result>
     </cffunction>
 </cfcomponent>

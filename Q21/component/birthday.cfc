@@ -4,23 +4,19 @@
         <cfargument  name="email" type="string" required="true">
         <cfargument  name="wish" type="string" required="true">
         <cfargument  name="imageFile" type="string" required="true">
-        <cfset uploadDirectory = ExpandPath("./assets/uploads/")>
-        <cfset requiredFilePath = uploadDirectory&arguments.imageFile>
-        <cfif requiredFilePath NEQ "">
-            <cfmail to="#arguments.email#"
-            from="abc@gmail.com"
-            subject="Birthday wishes to #arguments.babyName#"
-            mimeattach="#requiredFilePath#">
-            Dear #arguments.babyName#<br>
+        <cfset local.uploadDirectory = ExpandPath("./assets/uploads/")>
+        <cfset local.requiredFilePath = uploadDirectory&arguments.imageFile>
+        <!---<cfset msg = #arguments.wish#>--->
+        <cfif local.requiredFilePath NEQ "">
+            <cfmail to="#arguments.email#" from="abc@gmail.com" subject="Birthday wishes to #arguments.babyName#" mimeattach="#requiredFilePath#">Dear #arguments.babyName#<br>
+            <!---<cfsavecontent  variable="msg">
+            </cfsavecontent>--->
             #arguments.wish#
             </cfmail>
-            <cfoutput>
-                <p>Sent Successfully</p>
-            </cfoutput>
+            <cfset local.msg = "Sent Successfully">
         <cfelse>
-            <cfoutput>
-                <p>Failed to sent your mail</p>
-            </cfoutput>
+            <cfset local.msg = "Failed to sent your mail">
         </cfif>
+        <cfreturn local.msg>
     </cffunction>
 </cfcomponent>

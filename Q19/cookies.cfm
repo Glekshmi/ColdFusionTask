@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Q18</title>
+    <title>Q19</title>
 </head>
 <body>
 
@@ -10,8 +10,8 @@
     </form>
 
     <cfif structKeyExists(form, "submit")>
-        <cfset componentObj = createObject("component","component/cookies")>
-        <cfset result = componentObj.visitCount()>
+        <cfset local.componentObj = createObject("component","component/cookies")>
+        <cfset local.result = local.componentObj.visitCount()>
         <cfoutput>
             <p>#result#</p>
         </cfoutput>

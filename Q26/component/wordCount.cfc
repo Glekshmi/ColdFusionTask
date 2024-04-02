@@ -1,17 +1,17 @@
 <cfcomponent>
     <cffunction  name="uploadFile" access="public" returnType="any">
         <cfargument  name="textFile" type="any" required="true">
-        <cfset uploadDirectory = ExpandPath("./assets/uploads/")>
-        <cfset uploadedFilePath = uploadDirectory&arguments.textFile>
+        <cfset local.uploadDirectory = ExpandPath("./assets/uploads/")>
+        <cfset local.uploadedFilePath = uploadDirectory&arguments.textFile>
         <cffile action="read" file="#uploadedFilePath#" variable="Birds">
         
-        <cfset count = 0>
-        <cfset wordList = []>
-        <cfset wordList = Birds>
-        <cfset separateWord = listToArray(wordList," ")>
-        <cfloop array="#separateWord#" index="index">
-            <cfset count++>
+        <cfset local.count = 0>
+        <cfset local.wordList = []>
+        <cfset local.wordList = Birds>
+        <cfset local.separateWord = listToArray(wordList," ")>
+        <cfloop array="#local.separateWord#" index="index">
+            <cfset local.count++>
         </cfloop>
-        <cfreturn count>
+        <cfreturn local.count>
     </cffunction>
 </cfcomponent>

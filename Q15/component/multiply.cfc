@@ -4,8 +4,8 @@
         <cfargument  name="secondValue" type="numeric" required="true">
         <cfargument  name="thirdValue" type="numeric" required="false" default="1">
         <cfargument  name="fourthValue" type="numeric" required="false" default="1">
-        <cfset product = 1>
-          <cfset product = #arguments.firstValue#* #arguments.secondValue#*#arguments.thirdValue#* #arguments.fourthValue#>  
-        <cfreturn product>
+        <cfset local.product = 1>
+          <cfset local.product = #arguments.firstValue#* #arguments.secondValue#*#arguments.thirdValue#* #arguments.fourthValue#>  
+        <cfreturn local.product>
     </cffunction>
 </cfcomponent>

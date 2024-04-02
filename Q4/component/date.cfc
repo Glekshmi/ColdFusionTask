@@ -1,102 +1,94 @@
 <cfcomponent>
     <cffunction  name="showDate" access="public" returnType="any">
-        <cfset curDate = #DateFormat(Now(), "dd/mm/yyyy")#>
-        <cfset curMonth = month(curDate)>
-        <cfset monthName = DateFormat(Now(), "mmmm")>
-        <cfset monthEndDate = daysInMonth(curDate)&"/"&dateFormat(now(),"mm/yyyy")>
-        <!---<cfdump  var="#monthEndDate#">--->
-        <cfset weekDay = dayOfWeek(monthEndDate)>
-        <!---<cfdump  var="#weekDay#">--->
+        <cfset dateStruct = {}>
+        <cfset local.curDate = #DateFormat(Now(), "dd/mm/yyyy")#>
+        <cfset dateStruct.curDate = curDate>
+        <cfset local.curMonth = month(now())>
+        <cfset dateStruct.curMonth = curMonth>
+        <cfset local.monthName = DateFormat(Now(), "mmmm")>
+        <cfset dateStruct.monthName = monthName>
+        <cfset local.monthEndDate = daysInMonth(now())&"/"&dateFormat(now(),"mm/yyyy")>
+        <cfset dateStruct.monthEndDate = monthEndDate>
+        
+        <cfset local.weekDay = dayOfWeek(now())>
         <cfswitch expression="#weekDay#">
             <cfcase value="1">
-                <cfset curDay="Sunday">
+                <cfset local.curDay="Sunday">
             </cfcase>
             <cfcase value="2">
-                <cfset curDay="Monday">
+                <cfset local.curDay="Monday">
             </cfcase>
             <cfcase value="3">
-                <cfset curDay="Tuesday">
+                <cfset local.curDay="Tuesday">
             </cfcase>
             <cfcase value="4">
-                <cfset curDay="Wednesday">
+                <cfset local.curDay="Wednesday">
             </cfcase>
             <cfcase value="5">
-                <cfset curDay="Thursday">
+                <cfset local.curDay="Thursday">
             </cfcase>
             <cfcase value="6">
-                <cfset curDay="Friday">
+                <cfset local.curDay="Friday">
             </cfcase>
             <cfcase value="7">
-                <cfset curDay="Saturday">
+                <cfset local.curDay="Saturday">
             </cfcase>
             <cfdefaultcase>
-                <cfset curDay="invalid month">
+                <cfset local.curDay="invalid month">
             </cfdefaultcase>
         </cfswitch>
+        <cfset local.dayCount = DateFormat(monthEndDate, "dd")>
         
-        <cfset dayCount = DateFormat(monthEndDate, "dd")>
-        <!---<cfset copyDayCount = DateFormat(monthEndDate, "dd")>--->
-        
-        <cfset friday=6>
-        <cfloop index="i" from="#dayCount#" to="1" step="-1">
-            <cfset lastFriCheck=i&"/"&DateFormat(now(),"mm/yyyy")>
-            <cfif Dayofweek(lastFriCheck) Eq friday>
-                <cfset lastFriday="#lastFriCheck#">
+        <cfset local.friday=6>
+        <cfloop index="i" from="#local.dayCount#" to="1" step="-1">
+            <cfset local.lastFriCheck=i&"/"&DateFormat(now(),"mm/yyyy")>
+            <cfif Dayofweek(local.lastFriCheck) Eq local.friday>
+                <cfset local.lastFriday="#local.lastFriCheck#">
                 <cfbreak>
             </cfif>
         </cfloop>
-        
-        <cfoutput>
-            <p>Today's date : #curDate#</p>
-            <p>Current Month in numeric: #curMonth#</p>
-            <p>Current month in word: #monthName#</p>
-            <p>Last friday date: #lastFriday#</p>
-            <p>Last day of month: #curDay#</p>
-        </cfoutput>
-
-        <cfset lastDayCount = 0>
-        <cfset copyCurDate = DateFormat(monthEndDate, "dd")>
-        <cfloop index="i" from="#copyCurDate#" to="1" step="-1">
-            <cfset curFiveDates=i&"/"&DateFormat(now(),"mm/yyyy")>
-            <cfset printLastDates = DateFormat(#curFiveDates#,"dd-mmm-yyyy")>
-            <cfset weekDayName = Dayofweek(curFiveDates)>
+        <cfset dateStruct.lastFriday = lastFriday>
+        <cfreturn dateStruct>
+    </cffunction>
+    <cffunction  name="retDaywithColor">
+        <cfset local.lastDayCount = 0>
+        <cfset local.dayColor=[]>
+        <cfset local.monthEndDate = daysInMonth(now())&"/"&dateFormat(now(),"mm/yyyy")>
+        <cfset local.copyCurDate = DateFormat(local.monthEndDate, "dd")>
+        <cfloop index="i" from="#local.copyCurDate#" to="1" step="-1">
+            <cfset local.curFiveDates=i&"/"&DateFormat(now(),"mm/yyyy")>
+            <cfset local.weekDayName = Dayofweek(local.curFiveDates)>
             
-            <cfif weekDayName EQ "1">
-                <cfoutput>
-                    <p style="color:red;">#printLastDates #Sunday</p>
-                </cfoutput>
-            <cfelseif weekDayName EQ "2">
-                <cfoutput>
-                    <p style="color:green;">#printLastDates #Monday</p>
-                </cfoutput>
-            <cfelseif weekDayName EQ "3">
-                <cfoutput>
-                    <p style="color:orange;">#printLastDates #Tuesday</p>
-                </cfoutput>
-            <cfelseif weekDayName EQ "4">
-                <cfoutput>
-                    <p style="color:yellow;">#printLastDates #Wednesday</p>
-                </cfoutput>
-            <cfelseif weekDayName EQ "5">
-                <cfoutput>
-                    <p style="color:black;">#printLastDates #Thursday</p>
-                </cfoutput>
-            <cfelseif weekDayName EQ "6">
-                <cfoutput>
-                    <p style="color:blue;">#printLastDates #Friday</p>
-                </cfoutput>
-            <cfelseif weekDayName EQ "7">
-                <cfoutput>
-                    <p style="color:rgb(92, 3, 3);">#printLastDates #Saturday</p>
-                </cfoutput>
+            <cfif local.weekDayName EQ "1">
+                <cfset local.colors="##ff0000">
+                <cfset local.day="Sunday">
+            <cfelseif local.weekDayName EQ "2">
+                <cfset local.colors="##008000">
+                <cfset local.day="Monday">
+            <cfelseif local.weekDayName EQ "3">
+                <cfset local.colors="##ffa500">
+                <cfset local.day="Tuesday">
+            <cfelseif local.weekDayName EQ "4">
+                <cfset local.colors="##ffff00">
+                <cfset local.day="Wednesday">
+            <cfelseif local.weekDayName EQ "5">
+                <cfset local.colors="##000000">
+                <cfset local.day="Thursday">
+            <cfelseif local.weekDayName EQ "6">
+                <cfset local.colors="##0000ff">
+                <cfset local.day="Friday ">
+            <cfelseif local.weekDayName EQ "7">
+                <cfset local.colors="##ff0000">
+                    <cfset local.day="Saturday">
             </cfif>
-            
-            <cfif lastDayCount EQ 4>
+            <cfset arrayAppend(local.dayColor, {date =local.curFiveDates, color = local.colors})>
+            <cfif local.lastDayCount EQ 4>
                 <cfbreak>
             <cfelse>
-                <cfset lastDayCount++>
+                <cfset local.lastDayCount++>
             </cfif>
         </cfloop>
-
+        
+        <cfreturn local.dayColor>
     </cffunction>
 </cfcomponent>
