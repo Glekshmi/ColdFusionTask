@@ -27,13 +27,13 @@
         <cfobject name="multiplyObj" type="component" component="component/multiply">
         <cfoutput>
             <p>using cfinvoke</p>
-            <p>#result1#</p>
-            <p>#result2#</p>
-            <p>#result3#</p>
+            <p>multiply(1,2) = #result1#</p>
+            <p>multiply(1,2,3) = #result2#</p>
+            <p>multiply(1,2,3,4) = #result3#</p>
             <p>using createObject</p>
             multiply(2,3) = #local.componenetObj.multiply(2,3)#<br>   
             <p>using cfobject</p>
-            #multiplyObj.multiply(1,2)#  
+            <p>multiply(1,2) = #multiplyObj.multiply(1,2)#</p>
 
         </cfoutput>
 </body>

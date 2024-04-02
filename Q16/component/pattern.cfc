@@ -1,14 +1,15 @@
 <cfcomponent>
 <cffunction  name="pattern" access="public" returnType="any">
 
-     <cfset rows = 3>
-    <cfset cols = 3>
-    <cfoutput>
-        <cfloop from="1" to="#rows#" index="row">
-                <cfloop from="1" to="#cols#" index="col">
-                    #((col-1)*rows)+row#
-                </cfloop><br>
+    <cfset local.rows = 3>
+    <cfset local.cols = 3>
+    <cfset pattern = []>
+    <cfloop from="1" to="#rows#" index="row">
+        <cfloop from="1" to="#cols#" index="col">
+           <cfset arrayAppend(pattern,((col-1)*rows)+row)>
         </cfloop>
-    </cfoutput>
+        <cfset arrayAppend(pattern,"<br>")>
+    </cfloop>
+    <cfreturn pattern> 
 </cffunction>
 </cfcomponent>

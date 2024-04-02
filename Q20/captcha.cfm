@@ -20,6 +20,10 @@
             <cfinvokeargument  name="captcha"  value="#form.captcha#">
             <cfinvokeargument  name="email"  value="#form.email#">
         </cfinvoke>
+        
+        <cfoutput>
+            <p>#result#</p>
+        </cfoutput>
     </cfif>
 
 </body>

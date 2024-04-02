@@ -9,8 +9,7 @@
                     <cfset arrayAppend(result, numList[i])>
                 </cfif>
             </cfloop>
-            <cfset resultList = arrayToList(result)>
-            <cfreturn resultList>
+            <cfreturn result>
         </cfif>
     </cffunction>
 </cfcomponent>

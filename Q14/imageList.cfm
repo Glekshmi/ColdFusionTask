@@ -9,9 +9,8 @@
 
     <cfset imgId = url.Id>
     <cfset imageName = url.imgName>
-    <cfset thumbnailPathName = url.thumbnailPathName>
     <cfset nwList = []>
-    <cfset nwList = thumbnailPathName>
+    <cfset nwList = url.thumbnailPathName>
     <cfset thumbnailName = listToArray(nwList,"\")>
     <cfset imgSourcePath = arrayLast(thumbnailName)>
 

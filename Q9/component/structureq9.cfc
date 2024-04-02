@@ -7,10 +7,7 @@
             <cfreturn "#arguments.key# already exist so you cannot add again">
         <cfelse>
             <cfset structInsert(session.sessVariable, arguments.key , arguments.value)>
-            <cfdump  var="#session.sessVariable#" abort>
         </cfif>
-            <cfset local.result = session.sessVariable>
-            <cfreturn local.result>
     </cffunction>
 </cfcomponent>
 

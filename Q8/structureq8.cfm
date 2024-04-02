@@ -16,11 +16,11 @@
         </form>
     
     <cfif structKeyExists(form,"key")>
-        <cfinvoke  component="component/structureq8" method="printStruct" returnVariable="result">
+        <cfinvoke  component="component/structureq8" method="printStruct">
             <cfinvokeargument name="key" value="#form.key#"/>
             <cfinvokeargument name="value" value="#form.value#"/>
         </cfinvoke>
-        <cfdump  var="#result#">
+        <cfdump  var="#session.sessVariable#">
     </cfif>
     
 </body>

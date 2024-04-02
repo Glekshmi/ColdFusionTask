@@ -27,8 +27,20 @@ Saturday - bold red
         <input type="submit" name="submit" value="Show Date">
     </form>
     <cfif structKeyExists(form, "submit")>
-        <cfset componentObj = createObject("component", "component/date")>
-        <cfset result = componentObj.showDate()>
+        <cfset componentObject = createObject("component", "component/date")>
+        <cfset result = componentObject.showDate()>
+        <cfset lastFiveDays = componentObject.retDaywithColor()>
+        <cfdump  var="#lastFiveDays#">
+        <cfoutput>
+            <p>Today's date : #result.curDate#</p>
+            <p>Current Month in numeric : #result.curMonth#</p>
+            <p>Current month in words : #result.monthName#</p>
+            <p>Last friday date : #result.lastFriday#</p>
+            <p>Last day of month : #result.monthEndDate#</p>
+            <cfloop array="#lastFiveDays#" index="index">
+                <p style="color:#index.color#;">#index.date#</p>
+            </cfloop>
+        </cfoutput>
     </cfif>
     
 </body>

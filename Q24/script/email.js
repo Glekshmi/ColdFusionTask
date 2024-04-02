@@ -6,21 +6,26 @@ $(document).ready(function() {
             return;
         }
         $.ajax({
-            url: "component/subscribe.cfc?method=checkMail",
+            url: 'component/subscribe.cfc?method=checkMail',
             type: 'post',
-            data:  {email: email}, 
+            data:  {email: email},
             dataType:"json",
             success: function(response) {
-                if (response.message === "exists"){
-                    alert('Email id is already there');
-                    $('#submitButton').prop('disabled',true);
+                if (response.message === "exists") {
+                    alert(response.message);
+                    alert("Email id is already there");
+                    $("#submitBtn").prop("disabled", true);
                 } else {
-                    $('#submitButton').prop('disabled',false);
+                    alert(response);
+                    
+                    $("#submitBtn").prop("disabled", false);
                 }
+                
             },
             error: function(xhr, status, error) {
-                $("#submitBtn").prop("disabled", false);
+                alert("An error occurred:"+error);
             }
+            
         });
     });
 });

@@ -8,10 +8,13 @@
 </head>
 <body>
 
-    <cfset local.componenetObj = createObject("component", "component/pattern")>
+    <cfset local.componentObj = createObject("component", "component/pattern")>
+    <cfset local.result = local.componentObj.pattern()>   
         <cfoutput>
-            #local.componenetObj.pattern()#
+            <cfloop array="#local.result#" index="index">
+                #index#
+            </cfloop>
         </cfoutput>
-
+        <cfdump  var="#local.result#">
 </body>
 </html>

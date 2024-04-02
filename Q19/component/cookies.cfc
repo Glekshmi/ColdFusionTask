@@ -1,11 +1,11 @@
 <cfcomponent>
     <cffunction  name="visitCount" access="public" >
-        <cfset count = 0>
+        <cfset local.count = 0>
         <cfif isDefined("cookie.visiterCount")>
-            <cfset count = cookie.visiterCount>
+            <cfset local.count = cookie.visiterCount>
         </cfif>
-        <cfset count++>
-        <cfcookie name="visiterCount" value="#count#" expires="30">
-        <cfreturn count>
+        <cfset local.count+=1>
+        <cfcookie name="visiterCount" value="#local.count#">
+        <cfreturn local.count>
     </cffunction>
 </cfcomponent>
