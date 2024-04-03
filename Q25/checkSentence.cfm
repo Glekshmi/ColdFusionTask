@@ -12,9 +12,17 @@
     </form>
 
     <cfif structKeyExists(form, "sentence")>
-    <cfinvoke  method="readText" component="component/iindex" returnVariable="">
+    <cfinvoke  method="checkWordsForCount" component="component/tagCloud" returnVariable="result">
         <cfinvokeargument  name="sentence"  value="#form.sentence#">
     </cfinvoke>
+    <cfoutput>
+        <cfif arrayLen(result)>
+            <cfloop array="#result#" index="word">
+                #word.word# (#word.count#)<br>
+            </cfloop>
+        </cfif>
+    </cfoutput>
+    
     </cfif>
 </body>
 </html>
