@@ -10,9 +10,8 @@
                 <cflocation  url="login.cfm">
             </cfif>
         <cfelse>
-            <cfoutput>
-                <p>Invalid username or password</p>
-            </cfoutput>
+                <cfset local.msg = "Invalid username or password">
         </cfif>
+        <cfreturn local.msg>
     </cffunction>
 </cfcomponent>

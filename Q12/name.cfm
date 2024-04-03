@@ -4,7 +4,7 @@
     <title>Q12</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="name.cfm" method="post">
         <label name="numInput">Enter a number less than 10</label><br>
         <input type="text" name="numInput"><br>
         <input type="submit" value="Submit"><br>

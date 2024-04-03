@@ -2,6 +2,7 @@
     <cffunction  name="checkLogin" access="public">
         <cfargument  name="userName" type="string">
         <cfargument  name="password" type="string">
+        <cfdump  var="#arguments#">
         <cfif arguments.userName NEQ "" AND arguments.password NEQ "">
             <cfquery name="fetchLog">
                 SELECT Username, Password, Role
@@ -17,12 +18,12 @@
                 <cfset userRole = fetchLog.Role>
                 <!---<cfdump  var="#userRole#">--->
                 <cfswitch expression="#userRole#">
-                <cfcase value="admin">
+                <cfcase value="admin" or value="editor">
                     <cflocation  url="adminPage.cfm?">
                 </cfcase>
-                <cfcase value="editor">
+                <!---<cfcase value="editor">
                     <cflocation  url="adminPage.cfm?">
-                </cfcase>
+                </cfcase>--->
                 <cfcase value="user">
                     <cflocation  url="userPage.cfm?">
                 </cfcase>

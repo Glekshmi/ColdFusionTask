@@ -17,9 +17,11 @@
     </form>
 
     <cfif structKeyExists(form, "userName") AND structKeyExists(form, "password")>
-        <cfinvoke  method="checkLogin" component="component/login" returnVariable="">
-            <cfinvokeargument  name="userName"  value="#form.userName#">
-            <cfinvokeargument  name="password"  value="#form.password#">
+        <cfdump var=#form.userName#>
+        <cfdump var=#form.password#>
+        <cfinvoke method="checkLogin" component="component/login" returnVariable="">
+            <cfinvokeargument name="userName" value="#form.userName#">
+            <cfinvokeargument name="password" value="#form.password#">
         </cfinvoke>
     </cfif>
 
