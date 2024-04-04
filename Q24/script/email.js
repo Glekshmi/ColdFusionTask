@@ -11,11 +11,13 @@ $(document).ready(function(){
             data: {email:email},
             dataType:'json',
             success: function(response) {
-                console.log(response.message)
-                if (response.message === "exists") {
+                console.log(response)
+                var count = response;
+                if (count>=1) {
                     alert("Email id is already there");
                     $("#submitBtn").prop("disabled", true);
                 } else { 
+                     alert("Email id is not present");
                     $("#submitBtn").prop("disabled", false);
                 }
                 
@@ -25,27 +27,24 @@ $(document).ready(function(){
             }
             
         });
-    })
+    });
 
-    $('#checkEmail').click(function(){
+    $('#submitBtn').click(function(){
         var email = $('#email').val();
-        var name= $('#firstName').val();
-        if (email.trim() === '') {
-            alert('Please enter your email.');
-            return;
-        }
+        var firstName= $('#firstName').val();
         $.ajax({
             url:"component/subscribe.cfc?method=insertData",
             type:'post',
             data: {email:email,firstName:firstName},
             dataType:'json',
             success: function(response) {
-                console.log(response.message)
-                if (response.message === "exists") {
-                    alert("Email id is already there");
-                    $("#submitBtn").prop("disabled", true);
+                console.log(response)
+                var count = response;
+                if (count === 1) {
+                    alert("success");
+                  
                 } else { 
-                    $("#submitBtn").prop("disabled", false);
+                    alert("failed");
                 }
                 
             },
@@ -54,5 +53,5 @@ $(document).ready(function(){
             }
             
         });
-    })
+    });
 });
