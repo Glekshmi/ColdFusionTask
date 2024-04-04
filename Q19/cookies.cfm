@@ -13,7 +13,7 @@
         <cfset local.componentObj = createObject("component","component/cookies")>
         <cfset local.result = local.componentObj.visitCount()>
         <cfoutput>
-            <p>#result#</p>
+            <p>#local.result#</p>
         </cfoutput>
     </cfif>
 

@@ -13,7 +13,7 @@ $(document).ready(function(){
             success: function(response) {
                 console.log(response)
                 var count = response;
-                if (count>=1) {
+                if (count===1) {
                     alert("Email id is already there");
                     $("#submitBtn").prop("disabled", true);
                 } else { 
