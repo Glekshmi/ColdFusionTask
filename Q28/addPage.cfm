@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="./style/page.css">
+    <link rel="stylesheet" href="./style/styleQn28.css">
+    <title>Document</title>
 </head>
 <body>
-    <h1>Login Page</h1>
-    <form action="" method="post">
-        <label>Enter Your Page Name</label>
-        <input type="text" name="pageName"><br><br>
-        <label>Enter Page Description</label>
-        <input type="text" name="desc"><br><br>
-        <input type="submit" value="Submit">
-    </form>
-
-    <cfif structKeyExists(form, "pageName") AND structKeyExists(form, "desc")>
-        <cfinvoke  method="addPage" component="component/addPage" returnVariable="">
-            <cfinvokeargument  name="pageName"  value="#form.pageName#">
-            <cfinvokeargument  name="desc"  value="#form.desc#"> 
-        </cfinvoke>
-    </cfif>
-
+    <div>
+        <h3>ADD Page</h3>
+    </div>
+    <div>
+        <form action="addPage.cfm" method="post">
+            <lable>Enter Page Name : </labe>
+            <input type="text" name="pageName"><br><br>
+            <label>Enter Description : </label>
+            <textarea name="pageDes"></textarea><br>
+            <br>
+            <input type="submit" vale="ADD" name="submit">
+        </form>
+    </div>
+    <div>
+        <cfoutput>
+            <cfif StructKeyExists(form, "pageName")>
+                <cfset local.demo=createObject("component","component/change")>
+                    #local.demo.addRow(form.pageName,form.pageDes)#
+            </cfif>
+        </cfoutput>
+    </div>
 </body>
 </html>

@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
     <link rel="stylesheet" href="./style/user.css">
+    <title>Document</title>
 </head>
 <body>
-
-    <h1>Page List</h1>
-
-    <cfquery name="fetchPageTable">
-        SELECT PageName, Description
-        FROM PageTable
-    </cfquery>
-    
+    <div>
+        <h1>User Page</h1>
+    </div>
     <cfoutput>
-        <cfloop query="fetchPageTable">
-            <p><h3 class="name"><a href="descriptionPage.cfm?pageName=#URLEncodedFormat(fetchPageTable.PageName)#&desc=#URLEncodedFormat(fetchPageTable.Description)#">#fetchPageTable.PageName#</a></h3></p>
-        </cfloop>
+        <div>
+            <cfset local.demo=createObject("component","component/change")>
+            <cfset local.display=#local.demo.display()#>
+        </div>
+        <div>
+            <table border="1">
+                <tr>
+                    <th>PageNo</th>
+                    <th>PageName</th>
+                </tr>
+                <cfloop query="#local.display#">
+                    <tr>
+                        <td>#pageId#</td>
+                        <td><a href="userView.cfm?idPage=#pageId#">#pageName#</a></td>
+                    </tr>           
+                </cfloop>
+            </table>
+        </div>
+        <button type="button"><a href="login.cfm">logout</a></button>
     </cfoutput>
-
 </body>
 </html>
