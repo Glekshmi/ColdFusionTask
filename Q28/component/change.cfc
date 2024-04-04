@@ -1,5 +1,4 @@
 <cfcomponent>
-        <!--- Login--->
         <cffunction name="login" access="public">
             <cfargument name="userName" required="true">
             <cfargument name="password" required="true">
@@ -30,7 +29,6 @@
         </cffunction>
 
 
-        <!--- For Display Table --->
         <cffunction name="display" access="remote">
             <cfquery name="forDisplay">
                 select * from PageTable;
@@ -38,7 +36,7 @@
             <cfreturn forDisplay>
         </cffunction>
 
-        <!--- Add new row --->
+       
         <cffunction name="addRow" access="remote">
             <cfargument name="pageName" required="true">
             <cfargument name="pageDes" required="true">
@@ -57,7 +55,7 @@
             </cfif>
         </cffunction>
 
-        <!--- view for user--->
+       
         <cffunction name="viewData" access="remote">
             <cfargument name="idPage">
             <cfquery name="forDisplay">
@@ -67,7 +65,7 @@
             <cfreturn forDisplay>
         </cffunction>
 
-        <!--- Edit Row --->
+        
         <cffunction name="editRow" access="remote">
             <cfargument name="pageName" required="true">
             <cfargument name="pageDes" required="true">
@@ -82,14 +80,12 @@
                     Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
                     where pageId=<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
                 </cfquery>
-                <!---<cfreturn "updated!!!!!!">--->
                 <cflocation  url="adminPage.cfm">
             <cfelse>
-                <!---<cfreturn "there is no page">--->
             </cfif>
         </cffunction>
 
-        <!--- Delete Row --->
+        
         <cffunction name="deleteRow" access="remote">
             <cfargument name="idPage" required="true">
             <cfquery name="delete">
