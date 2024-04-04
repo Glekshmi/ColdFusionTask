@@ -103,8 +103,6 @@
         <cfquery name="forDisplay">
             SELECT * FROM wordList ORDER BY len(word) DESC
         </cfquery>
-        
-
 
         <cfset var result = []>
         <cfset var colors = ["blue", "green", "red", "cyan", "pink", "yellow"]>
