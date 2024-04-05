@@ -7,16 +7,27 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <h1>Admin Page</h1>
-    </div>
-    <cfoutput>
-        <div>
-            <cfset local.demo=createObject("component","component/change")>
-            <cfset local.display=#local.demo.display()#>
-        </div>
+
+        <cfoutput>
+        <cfset userRole = session.userRole>
+        
+        <cfset local.demo=createObject("component","component/pages")>
+        <cfset local.display=#local.demo.display()#> 
+       
+        <h1>#userRole# page</h1>
         <div>
             <table border="1">
+            <cfif userRole === 'user'>
+                <tr>
+                    <th>PageID</th>
+                    <th>PageName</th>
+                </tr>
+                <cfloop query="#local.display#">
+                    <tr>
+                        <td>#pageId#</td>
+                        <td><a href="userView.cfm?idPage=#pageId#">#pageName#</td>
+                </cfloop> 
+            <cfelse>
                 <tr>
                     <th>PageID</th>
                     <th>PageName</th>
@@ -30,20 +41,24 @@
                         <td>#pageName#</td>
                         <td>#Description#</td>
                         <td><a href="editPage.cfm?idPage=#pageId#">Edit</a></td>
-                        <td><a href="component/change.cfc?method=deleteRow&idPage=#pageId#">Delete</a></td>
+                        <td><a href="component/pages.cfc?method=deleteRow&idPage=#pageId#">Delete</a></td>
                     </tr>     
-                </cfloop>      
+                </cfloop> 
+            </cfif>   
             </table>
         </div>
         <div class="footer">
-            <form action="addPage.cfm" method="post">
+            <form action="editPage.cfm" method="post">
                 <input type="submit" value="Add New Page" name="submit">
             </form>
-            <button type="button" class="logoutBtn"><a href="login.cfm">logout</a></button>
+            <button type="button" class="logoutBtn"><a href="component/pages.cfc?method=logout">logout</a></button>
         </div>
         
-    </cfoutput>
-    </div>
+        </cfoutput>
+        </div>
+
+
+   
 
 </body>
 </html>

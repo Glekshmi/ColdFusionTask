@@ -10,7 +10,7 @@
     <cfoutput>
             
             <cfset local.idPage=URL.idPage>
-            <cfset local.demo=createObject("component","component/change")>
+            <cfset local.demo=createObject("component","component/pages")>
             <cfset local.display=#local.demo.viewData(local.idPage)#>
             <cfloop query="#local.display#">
             <div>
@@ -20,7 +20,7 @@
                 <p>#Description#</p>
             </div>    
             </cfloop>      
-        <button type="button"><a href="userPage.cfm">Back</a></button>
+        <button type="button"><a href="adminPage.cfm">Back</a></button>
         <button type="button"><a href="login.cfm">logout</a></button>
     </cfoutput>
 </body>

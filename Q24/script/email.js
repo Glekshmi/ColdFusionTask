@@ -11,9 +11,10 @@ $(document).ready(function(){
             data: {email:email},
             dataType:'json',
             success: function(response) {
-                console.log(response)
+                
                 var count = response;
-                if (count===1) {
+                /*console.log(count)*/
+                if (count>=1) {
                     alert("Email id is already there");
                     $("#submitBtn").prop("disabled", true);
                 } else { 

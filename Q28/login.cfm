@@ -1,3 +1,5 @@
+<cfset myComponent = CreateObject("component", "component/pages")>
+<cfset myComponent.login()>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +22,13 @@
     <div>
         <cfoutput>
             <cfif structKeyExists(form,"userName") AND structKeyExists(form,"password")>
-                <cfinvoke component="component/change" method="login" returnvariable="loginMsg">
+                <cfinvoke component="component/pages" method="doLogin" returnvariable="result">
                     <cfinvokeargument name="userName" value="#form.userName#">
                     <cfinvokeargument name="password" value="#form.password#">
                 </cfinvoke>
-                #loginMsg#
+                #result#
             </cfif>
         </cfoutput>
-    </div>
+    </div>    
 </body>
 </html>
