@@ -66,6 +66,7 @@
         <cfloop query="forDisplay">
             <cfset arrayAppend(result, {count = wordCounts[word], word = word})>
         </cfloop>
+        <cfdump  var="#result#">
         <cfreturn result>
     </cffunction>
     
