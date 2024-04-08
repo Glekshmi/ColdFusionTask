@@ -11,8 +11,8 @@
         <cfoutput>
         <cfset userRole = session.userRole>
         
-        <cfset local.demo=createObject("component","component/pages")>
-        <cfset local.display=#local.demo.display()#> 
+        <cfset local.demo=createObject("component","controls/pages")>
+        <cfset local.display=#local.demo.displayPage()#> 
        
         <h1>#userRole# page</h1>
         <div>
@@ -41,17 +41,17 @@
                         <td>#pageName#</td>
                         <td>#Description#</td>
                         <td><a href="editPage.cfm?idPage=#pageId#">Edit</a></td>
-                        <td><a href="component/pages.cfc?method=deleteRow&idPage=#pageId#">Delete</a></td>
+                        <td><a href="controls/pages.cfc?method=deleteRow&idPage=#pageId#">Delete</a></td>
                     </tr>     
                 </cfloop> 
             </cfif>   
             </table>
         </div>
         <div class="footer">
-            <form action="editPage.cfm" method="post">
+            <form action="editPage.cfm?" method="post">
                 <input type="submit" value="Add New Page" name="submit">
             </form>
-            <button type="button" class="logoutBtn"><a href="component/pages.cfc?method=logout">logout</a></button>
+            <button type="button" class="logoutBtn"><a href="controls/pages.cfc?method=logout">Logout</a></button>
         </div>
         
         </cfoutput>
