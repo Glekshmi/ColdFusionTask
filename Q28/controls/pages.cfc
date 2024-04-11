@@ -49,24 +49,7 @@
     </cffunction>
 
     <!---add/edit begins--->
-    <cffunction name="addPage" access="remote">
-        <cfargument name="pageName" required="true">
-        <cfargument name="pageDes" required="true">
-        <cfquery name="insertRow" result="insertResult">
-            insert into PageTable (pageName,Description)
-            values(
-                <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
-                <cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
-            )
-        </cfquery>
-        <cfif insertResult.recordCount EQ 1>
-            <cflocation  url="adminPage.cfm">
-        <cfelse>
-            <cfreturn "Please perform insert action">
-        </cfif>
-    </cffunction>   
-
-    <cffunction name="getPage" access="remote">
+    <cffunction name="editPage" access="remote">
         <cfargument name="idPage" required="true">
         <cfquery name="check">
             select PageName,Description from PageTable 
@@ -80,24 +63,37 @@
         </cfif>
     </cffunction>
 
-    <cffunction name="editPage" access="remote">
-        <cfargument name="pageName" required="true">
-        <cfargument name="pageDes" required="true">
-        <cfargument name="pageId" required="true">
-        <cfquery name="check">
-            select * from PageTable 
-            where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
-        </cfquery>
-        <cfif check.recordCount>
-            <cfquery name="updatePage">
-                update PageTable set pageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
-                Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
-                where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
-            </cfquery>
-            <cflocation  url="adminPage.cfm">
-        <cfelse>
-        </cfif>
-    </cffunction>
+    <cffunction name="savePage" access="remote" retrunType="string">
+            <cfargument name="pageName" required="true">
+            <cfargument name="pageDes" required="true">
+            <cfargument name="pageId" required="true">
+            <cfif arguments.pageId GT 0>
+                <cfquery name="updatePage">
+                    update PageTable set PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
+                    Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
+                    where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
+                </cfquery>
+                <cfreturn "page is updated"> 
+            <cfelse>
+                <cfquery name="pageCheck">
+                    select 1 from PageTable
+                    where PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">
+                </cfquery>
+                <cfif pageCheck.recordCount>
+                    <cfreturn "page is already present" >
+                <cfelse>
+                    <cfquery name="insertPage">
+                        insert into PageTable (PageName,Description)
+                        values(
+                            <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
+                            <cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
+                        )
+                    </cfquery>
+                    <cfreturn "inserted new page">
+                </cfif>
+            </cfif>
+        </cffunction>
+    
     <!---add/edit ends--->
 
     <cffunction name="deleteRow" access="remote">
@@ -108,4 +104,20 @@
         </cfquery>
         <cflocation url="../adminPAge.cfm">
     </cffunction>
+
+    <!---<cffunction name="containsSpecialChars" returntype="boolean" output="false">
+    <cfargument name="string" type="string" required="true">
+    <cfargument name="specialChars" type="string" required="true">
+    
+    <cfset var i = "">
+    
+    <cfloop index="i" from="1" to="#len(string)#">
+        <cfif listFind(specialChars, mid(string, i, 1))>
+            <cfreturn true>
+        </cfif>
+    </cfloop>
+    
+    <cfreturn false>
+</cffunction>--->
+
 </cfcomponent>
