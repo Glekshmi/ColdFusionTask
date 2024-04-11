@@ -14,7 +14,7 @@
         <cfif structKeyExists(form,"pageName") AND structKeyExists(form,"pageDes")>
            
             <cfset specialChars = "[]{}<>()!@|%&;:,.?/*-_+=">
-            <cfif form.pageName EQ " ">
+            <cfif form.pageName EQ ''>
                 <cfset variables.errors &= "page name field should not be empty"><br>
             <cfelseif IsValid("string",form.pageName)>
                 <cfset variables.errors &= "page name should contain alphabets only"><br>
@@ -23,15 +23,13 @@
                 <cfset variables.errors &= ''>
             </cfif>
 
-            <!---<cfif form.pageName eq "">
-                <cfset variables.errors &= "Page name field should not be empty"><br>
-            <cfelseif NOT isValid("regex", form.pageName, "^[a-zA-Z]+$")>
-                <cfset variables.errors &= "Page name should contain alphabets only"><br>
-            <cfelseif reFind("[#specialChars#]", form.pageName)>
-                <cfset variables.errors &= "Page name should not contain any special characters"><br>
+            <cfif form.pageDes EQ ''>
+                <cfset variables.errors &= "page description field should not be empty"><br>
+            <cfelseif NOT IsValid("any",form.pageDes)>
+                <cfset variables.errors &= "page description should not contain digits only"><br>
             <cfelse>
                 <cfset variables.errors &= "">
-            </cfif>--->
+            </cfif>
 
 
             <!---</cfloop>--->
