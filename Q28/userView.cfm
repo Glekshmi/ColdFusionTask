@@ -8,9 +8,8 @@
 </head>
 <body>
     <cfoutput>
-            
             <cfset local.idPage=URL.idPage>
-            <cfset local.demo=createObject("component","component/pages")>
+            <cfset local.demo=createObject("component","controls/pages")>
             <cfset local.display=#local.demo.viewData(local.idPage)#>
             <cfloop query="#local.display#">
             <div>
