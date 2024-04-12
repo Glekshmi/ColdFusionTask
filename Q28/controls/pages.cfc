@@ -13,7 +13,7 @@
             where userName=<cfqueryparam value="#arguments.userName#" cfsqltype="cf_sql_varchar">
             AND password=<cfqueryparam value="#arguments.password#" cfsqltype="cf_sql_varchar"> 
         </cfquery>
-        <cfset local.id = checkLogin.userId>
+        <!---<cfset local.id = checkLogin.userId>--->
         <cfif checkLogin.recordCount>
             <cfquery name="checkRole">
                 select role from UserTables
