@@ -1,0 +1,10 @@
+*{
+    padding: 4px;
+    margin: 2px;
+}
+a{
+    text-decoration: none;
+}
+.name{
+    color: brown;
+}
