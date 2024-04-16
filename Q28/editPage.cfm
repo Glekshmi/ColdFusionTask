@@ -12,32 +12,20 @@
 <cfif structKeyExists(form,"submit")>
     <cfif structKeyExists(form,"PageId") AND isNumeric(form.PageId)>
         <cfif structKeyExists(form,"pageName") AND structKeyExists(form,"pageDes")>
-           
-            <cfset specialChars = "[]{}<>()!@|%&;:,.?/*-_+=">
-            <cfif form.pageName EQ " ">
-                <cfset variables.errors &= "page name field should not be empty"><br>
-            <cfelseif IsValid("string",form.pageName)>
-                <cfset variables.errors &= "page name should contain alphabets only"><br>
-                <cfdump  var="#variables.errors#" >
+
+            <cfset aplabetsOnly = "/^[A-Za-z]+$/">
+            <cfset alphaNumeric = "/^(?![0-9]*$)[a-zA-Z0-9]+$/">
+            <cfif form.pageName EQ ''>
+                <cfset variables.errors &= "page name field should not be empty"&"<br>">
+            <cfelseif reFind("\d", form.pageName)>
+                <cfset variables.errors &= "page name should contain alphabets only"&"<br>">
             <cfelse>
                 <cfset variables.errors &= ''>
             </cfif>
-
-            <!---<cfif form.pageName eq "">
-                <cfset variables.errors &= "Page name field should not be empty"><br>
-            <cfelseif NOT isValid("regex", form.pageName, "^[a-zA-Z]+$")>
-                <cfset variables.errors &= "Page name should contain alphabets only"><br>
-            <cfelseif reFind("[#specialChars#]", form.pageName)>
-                <cfset variables.errors &= "Page name should not contain any special characters"><br>
-            <cfelse>
-                <cfset variables.errors &= "">
-            </cfif>--->
-
-
-            <!---</cfloop>--->
+            
             <cfif form.pageDes  EQ ''>
                 <cfset variables.errors &= "page description field should not be empty"&"<br>">
-            <cfelseif NOT isValid("regex",form.pageDes,alphaNumeric)>
+            <cfelseif isNumeric(form.pageDes)>
                 <cfset variables.errors &= "page description should not contain digits only"&"<br>">
             <cfelse>
                 <cfset variables.errors &= ''>
@@ -116,4 +104,3 @@
     </div>
 </body>
 </html>
-
