@@ -21,10 +21,8 @@
             </cfquery>
             <cfif checkRole.role NEQ "">
                 <cfset session.userRole = checkRole.role>
-                <cfif checkRole.role EQ "admin" OR checkRole.role EQ "editor">
-                    <cflocation url="adminHome.cfm">
-                <cfelse>
-                    <cflocation url="userHome.cfm">  
+                <cfif checkRole.role EQ "admin" OR checkRole.role EQ "editor" OR checkRole.role EQ "user">
+                    <cflocation url="adminHome.cfm"> 
                 </cfif>
             <cfelse>
                 <cfreturn "Role doesn't exists">
@@ -100,13 +98,22 @@
     
     <!---add/edit ends--->
 
+    <cffunction name="viewData" access="remote">
+        <cfargument name="idPage">
+        <cfquery name="forDisplay">
+            select * from PageTable
+            where pageId =<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
+        </cfquery>
+        <cfreturn forDisplay>
+    </cffunction>
+
     <cffunction name="deleteRow" access="remote">
         <cfargument name="idPage" required="true">
         <cfquery name="delete">
             delete from PageTable
             where pageId=<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
         </cfquery>
-        <cflocation url="../adminPAge.cfm">
+        <cflocation url="../adminPageView.cfm">
     </cffunction>
 
     <!---<cffunction name="containsSpecialChars" returntype="boolean" output="false">

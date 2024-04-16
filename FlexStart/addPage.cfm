@@ -1,3 +1,72 @@
+<cfset variables.PageId=0>
+<cfset variables.PageName=''>
+<cfset variables.Description=''>
+<cfset variables.errors =''>
+<cfset variables.savePage = ''>
+<cfif structKeyExists(url,"idPage") AND url.idPage GT 0>
+    <cfset variables.editPage=createObject("component","controls/pages").editPage(url.idPage)>
+    <cfset variables.PageId=url.idPage>
+    <cfset variables.PageName=editPage.pageName>
+    <cfset variables.Description=editPage.Description>
+</cfif>
+
+<cfif structKeyExists(form,"submit")>
+    <cfif structKeyExists(form,"PageId") AND isNumeric(form.PageId)>
+        <cfif structKeyExists(form,"pageName") AND structKeyExists(form,"pageDes")>
+
+            <cfset aplabetsOnly = "/^[A-Za-z]+$/">
+            <cfset alphaNumeric = "/^(?![0-9]*$)[a-zA-Z0-9]+$/">
+            <cfif form.pageName EQ ''>
+                <cfset variables.errors &= "page name field should not be empty"&"<br>">
+            <cfelseif reFind("\d", form.pageName)>
+                <cfset variables.errors &= "page name should contain alphabets only"&"<br>">
+            <cfelse>
+                <cfset variables.errors &= ''>
+            </cfif>
+            
+            <cfif form.pageDes  EQ ''>
+                <cfset variables.errors &= "page description field should not be empty"&"<br>">
+            <cfelseif isNumeric(form.pageDes)>
+                <cfset variables.errors &= "page description should not contain digits only"&"<br>">
+            <cfelse>
+                <cfset variables.errors &= ''>
+            </cfif>
+            <!---<cfdump  var="#pageName#">
+
+            <cfset nameList = []>
+            <cfset symbols = "[,$,&,+,,,:,;,=,?,@,|,',<,>,.,-,^,*,(,),%,!,]">
+            <cfset nameList = trim(form.pageName)>
+            <cfset symbolList = symbols>
+            <cfset pageNameArray = listToArray(nameList,"")>
+            <cfif len(nameList) EQ 0>
+                <cfset variables.errors &= "page name field should not be empty"> 
+            <cfelse>
+                <cfloop array="#pageNameArray#" index="i">
+                    <cfif  IsValid("integer",i) OR listFind(symbols,i)>
+                        <cfset variables.errors &= "page name should not contain digits">  
+                        <cfbreak>
+                    </cfif>
+                </cfloop>
+            </cfif>
+
+             <cfif len(form.pageDes) EQ 0>
+                <cfset variables.errors &= "page description field should not be empty"> 
+            <cfelseif IsValid("integer",form.pageDes)>
+                <cfset variables.errors &= "page name should not contain digits">  
+            <cfelse>
+                    <cfset variables.errors &= ''>
+            </cfif>--->
+
+        </cfif>
+     </cfif>
+
+        <cfif variables.errors EQ ''>
+            <cfif structKeyExists(form,"pageName")>
+                <cfset variables.savePage=createObject("component","controls/pages").savePage(form.pageName,form.pageDes,form.PageId)>
+            </cfif>
+        </cfif>
+</cfif>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +82,7 @@
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+  <script src="./script/validation.js"></script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
@@ -55,12 +124,14 @@
           <li><a class="nav-link scrollto" href="controls/pages.cfc?method=logout">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
+      <!-- .navbar -->
 
     </div>
-  </header><!-- End Header -->
+  </header>
+  <!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
+ 
  
 
   <main id="main">
@@ -68,60 +139,31 @@
     <!-- ======= Pricing Section ======= -->
     <section id="pricing" class="pricing">
 
-      <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <!---<p>Check our Pricing</p>--->
-        </header>
-
-        <div class="row gy-4" data-aos="fade-left">
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <h3 style="color: #07d5c0;">Can add books</h3>
-             
-              <img src="assets/img/Add_to_reading_list-512.webp" class="img-fluid" alt="">
-              <ul>
-                <li>You can add the name of books and its description</li>
-              </ul>
-              
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <h3 style="color: #07d5c0;">Can read books</h3>
-              <img src="assets/img/content-front-page-open-book.png" class="img-fluid" alt="">
-              <ul>
-                <li>You can read the books and its description</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <h3 style="color: #07d5c0;">Can edit books</h3>
-              <img src="assets/img/images (1).png" class="img-fluid" alt="">
-              <ul>
-                <li>You can edit the book names and its description</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <h3 style="color: #07d5c0;">Can remove books</h3>
-              <img src="assets/img/50665230-remove-book-icon.jpg" class="img-fluid" alt="">
-              <ul>
-                <li>you can remove the book from your list</li>
-              </ul>
-            </div>
-          </div>
-
-
+      <div class="container" data-aos="fade-up" id="addPageContainer">
+        <cfoutput>
+          <p class="savePage">#variables.savePage#</p>
+        </cfoutput>
+        <div class="loginSection">
+        <div class="loginHeader">
+            <h2 class="loginText" style="color: #4154f1;">Save Page</h2>
         </div>
-
-      </div>
+        <cfoutput>
+          <p id="nameError"style="color:red;">#variables.errors#</p>
+          <div class="loginBody">
+              <form action="" method="post" id="formName">
+                  <input type="hidden" name="PageId" value="#variables.PageId#">
+                  <label class="labelField">Enter Username</label><br>
+                  <input type="text" name="pageName"  value="#variables.PageName#" class="inputField"><br><br>
+                  <label class="labelField">Enter Password</label><br>
+                  <textarea name="pageDes"  class="inputField">#variables.Description#</textarea>
+                  <div class="submitButton">
+                    <br><input type="submit" value="Submit"  name="submit" class="addSubmitBtn">
+                  </div>
+              </form>
+          </div>
+        </cfoutput>
+        
+   
 
     </section><!-- End Pricing Section -->
 

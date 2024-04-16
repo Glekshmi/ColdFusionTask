@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +50,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="adminHome.cfm">Home</a></li>
+          <li><a class="nav-link scrollto active" href="userHome.cfm">Home</a></li>
           <li><a class="nav-link scrollto" href="userView.cfm">View</a></li>
           <li><a class="nav-link scrollto" href="newLogin.cfm">Logout</a></li>
         </ul>

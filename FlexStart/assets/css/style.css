@@ -75,7 +75,19 @@ section {
     line-height: 32px;
   }
 }
-
+#addPageContainer{
+  position: relative;
+    left: 29%;
+    top: 54px;
+}
+.addSubmitBtn{
+    position: relative;
+    left: 65px;
+}
+.savePage{
+  height: 10px;
+  color: #18d26e;
+}
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
@@ -981,8 +993,11 @@ section {
   overflow: hidden;
   transition: 0.3s;
   height: 353px;
+ 
 }
-
+.pricing .userHomeBox{
+  left:133%;
+}
 .pricing .box:hover {
   transform: scale(1.1);
   box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);

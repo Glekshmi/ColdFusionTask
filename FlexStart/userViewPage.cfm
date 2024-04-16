@@ -1,8 +1,7 @@
-<cfset myComponent = CreateObject("component", "controls/pages")>
-<cfset myComponent.login()>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -14,15 +13,28 @@
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="./assets/css/login.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: FlexStart
+  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
@@ -38,7 +50,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="index.html">Home</a></li>
+          <li><a class="nav-link scrollto active" href="userHome.cfm">Home</a></li>
+          <li><a class="nav-link scrollto" href="adminPageView.cfm">View</a></li>
+          <li><a class="nav-link scrollto" href="newLogin.cfm">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -46,61 +60,56 @@
     </div>
   </header><!-- End Header -->
 
+  <!-- ======= Hero Section ======= -->
  
-    <!-- Login Section-->
 
-    <main id="main" style="margin-top:100px;">
+  <main id="main">
 
-      <section id="login" class="login">
-  
-        <div class="container" data-aos="fade-up">
-          <div class="row gx-0">
-  
-            <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-              <div class="content">
-                
-                <div class="wrapper">
-                  <form action="" method="post">
-                    <h2>Login</h2>
-                      <div class="input-field">
-                      <input type="text" name="userName" required>
-                      <label for="userName">Enter your username</label>
-                    </div>
-                    <div class="input-field">
-                      <input type="password" name="password"  required>
-                      <label for="password" name="password">Enter your password</label>
-                    </div>
-             
-                    <input type="hidden" name="action"><br><br>
-                    <button type="submit">Log In</button>
-                  </form>
-                </div>              
-              </div>
-            </div>
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
 
-            <cfoutput>
-                <cfif structKeyExists(form,"userName") AND structKeyExists(form,"password")>
-                    <cfinvoke component="controls/pages" method="doLogin" returnvariable="result">
-                        <cfinvokeargument name="userName" value="#form.userName#">
-                        <cfinvokeargument name="password" value="#form.password#">
-                    </cfinvoke>
-                    <div class="errorDisplay">#result#!</div>
-                </cfif>
-            </cfoutput>
-  
-            <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
-              <img src="https://t3.ftcdn.net/jpg/03/39/70/90/360_F_339709048_ZITR4wrVsOXCKdjHncdtabSNWpIhiaR7.jpg" class="img-fluid" alt="">
-            </div>
-  
-          </div>
-        </div>
-  
-      </section>
+      <div class="container" data-aos="fade-up">
 
-    <!-- End Login Section-->
-	
-  <!-- ======= Footer ======= -->
-  
+        <header class="section-header">
+          <!---<p>Check our Pricing</p>--->
+        </header>
+
+        <div class="row gy-4" data-aos="fade-left">
+
+        <cfoutput>
+        <cfset local.idPage=url.idPage>
+        
+        <cfset local.demo=createObject("component","controls/pages")>
+        <cfset local.display=#local.demo.viewData(local.idPage)#>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-2" scope="col" >Page Name</th>
+                    <th scope="col" >Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <cfloop query="#local.display#">
+                    <tr>
+                        <td class="col-2">#pageName#</td>
+                        <td>#Description#</td>
+                    </tr>
+                </cfloop> 
+            </tbody>
+        </table>
+    </div>
+    </cfoutput>
+          
+
+
+        
+
+      </div>
+
+    </section><!-- End Pricing Section -->
+
+    
+
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->

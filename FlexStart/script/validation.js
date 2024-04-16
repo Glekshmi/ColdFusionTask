@@ -1,35 +1,39 @@
-function validation() {
-    pageName = document.getElementById('pageName').value.trim();
-	pageDesc=document.getElementById('pageDes').value.trim();
+$(document).ready(function(){
 	var count=0;
-	var aplabetsOnly = "/^[A-Za-z]+$/";
-    var alphaNumeric = "/^(?![0-9]*$)[a-zA-Z0-9]+$/";
-    if(pageName===""){
-		document.getElementById("nameError").innerHTML = "This field is required. Please enter Value!";
-		count++;
-	}
-	else if (aplabetsOnly.test(pageName)){
-		document.getElementById("nameError").innerHTML = "PageName field should contain alphabets only!";
-		count++;
-	}
-	else{
-		document.getElementById("nameError").innerHTML = "";
-	}
+	var errorMsg='';
+    $('#formName').submit(function(){
+        var Name = $('#pageName').val();
+		alert(Name);
+		return;
+        if (Name.trim() === '') {
+			errorMsg+='Please enter page name!';
+			
+        }
+		else if (aplabetsOnly.test(Name) === '') {
+            errorMsg+='page name should contain alphabets only!';
+            count++;
+        }
+		else
+			$("#nameError").html();
+	
+        var Description = $('#pageDesc').val();
+        if (Description.trim() === '') {
+            errorMsg+='Please enter page description!';
+            count++;
+        }
+		else if (alphaNumeric.test(Description) === '') {
+            errorMsg+='page description should not contain digits only!';
+            count++;
+        }
+		else
+		errorMsg+='';
+        
+		if(errorMsg == '')
+			return true;
+		else
+			$("#nameError").html(erroMsg);
 
-	if (pageDesc===""){
-		document.getElementById("descriptionError").innerHTML = "This field is required. Please enter Value!";
-		count++;
-	}
-    else if (!alphaNumeric.test(pageDesc)){
-		document.getElementById("descriptionError").innerHTML = "Page Description field should not contain digits only!";
-        count++;
-	}
-	else{
-		document.getElementById("descriptionError").innerHTML = "";
-	}
+	});
 
-	if(count==0)
-        return true;
-    else
-        return false;
-}
+
+});

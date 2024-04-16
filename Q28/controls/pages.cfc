@@ -96,6 +96,15 @@
     
     <!---add/edit ends--->
 
+    <cffunction name="viewData" access="remote">
+        <cfargument name="idPage">
+        <cfquery name="forDisplay">
+            select * from PageTable
+            where pageId =<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
+        </cfquery>
+        <cfreturn forDisplay>
+    </cffunction>
+
     <cffunction name="deleteRow" access="remote">
         <cfargument name="idPage" required="true">
         <cfquery name="delete">
