@@ -1,7 +1,7 @@
 <cfcomponent>
     <cffunction  name="login" access="public">
         <cfif session.sessVar EQ true>
-            <cflocation  url="adminPage.cfm">
+            <cflocation  url="adminHome.cfm">
         </cfif>
     </cffunction>
 
@@ -21,7 +21,11 @@
             </cfquery>
             <cfif checkRole.role NEQ "">
                 <cfset session.userRole = checkRole.role>
-                <cflocation url="adminPage.cfm">
+                <cfif checkRole.role EQ "admin" OR checkRole.role EQ "editor">
+                    <cflocation url="adminHome.cfm">
+                <cfelse>
+                    <cflocation url="userHome.cfm">  
+                </cfif>
             <cfelse>
                 <cfreturn "Role doesn't exists">
             </cfif>
@@ -38,14 +42,14 @@
         <cfif session.sessVar>
             <cfreturn forDisplay>
         <cfelse>
-            <cflocation  url="login.cfm">
+            <cflocation  url="newLogin.cfm">
         </cfif>
     </cffunction>
 
     <cffunction  name="logout" access="remote">
         <cfset structDelete(session, "sessVar")>
         <cfset session.sessVar=false>
-        <cflocation  url="../login.cfm">
+        <cflocation  url="../newLogin.cfm">
     </cffunction>
 
     <!---add/edit begins--->

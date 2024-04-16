@@ -1,0 +1,26 @@
+*{
+    padding: 8px;
+    margin: 5px;
+}
+a{
+    text-decoration: none;
+}
+.footer{
+    display: flex;
+    
+}
+.pageName{
+    color: blueviolet;
+}
+.desc{
+    font-size: large;
+    text-transform: lowercase;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.logoutBtn{
+    margin: 17px;
+}
