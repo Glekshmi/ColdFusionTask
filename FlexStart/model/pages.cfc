@@ -1,53 +1,50 @@
 <cfcomponent>
     <cffunction  name="login" access="public">
         <cfif session.sessVar EQ true>
-            <cflocation  url="adminHome.cfm">
+            <cflocation  url="../view/adminHome.cfm">
         </cfif>
     </cffunction>
 
-    <cffunction name="doLogin" access="public">
+    <cffunction name="doLogin" access="remote" returntype="JSON" returnformat="JSON">
         <cfargument name="userName" required="true">
         <cfargument name="password" required="true">
         <cfquery name="checkLogin" result="loginCheck">
-            select * from UserTables
-            where userName=<cfqueryparam value="#arguments.userName#" cfsqltype="cf_sql_varchar">
-            AND password=<cfqueryparam value="#arguments.password#" cfsqltype="cf_sql_varchar"> 
+            select UserId, UserName, Password from UserTables
+            where UserName=<cfqueryparam value="#arguments.userName#" cfsqltype="cf_sql_varchar">
+            AND Password=<cfqueryparam value="#arguments.password#" cfsqltype="cf_sql_varchar"> 
         </cfquery>
-        <cfset local.id = checkLogin.userId>
+        <cfset local.id = checkLogin.UserId>
         <cfif checkLogin.recordCount>
             <cfquery name="checkRole">
-                select role from UserTables
-                where userId=<cfqueryparam value="#local.id#" cfsqltype="cf_sql_integer">
+                select Role from UserTables
+                where UserId=<cfqueryparam value="#local.id#" cfsqltype="cf_sql_integer">
             </cfquery>
-            <cfif checkRole.role NEQ "">
-                <cfset session.userRole = checkRole.role>
-                <cfif checkRole.role EQ "admin" OR checkRole.role EQ "editor" OR checkRole.role EQ "user">
-                    <cflocation url="adminHome.cfm"> 
-                </cfif>
+            <cfset session.userRole = checkRole.Role>
+            <cfif checkRole.Role EQ "admin" OR checkRole.Role EQ "editor" OR checkRole.Role EQ "user">
+                <!---<cfset session.sessVar = true>--->
+                <cfreturn {"message":"exists"}>
             <cfelse>
-                <cfreturn "Role doesn't exists">
+                <cfreturn {"message":"not exists"}>
             </cfif>
-        <cfelse>
-            <cfreturn "Username or password doesn't match">
         </cfif>
     </cffunction>
 
     <cffunction name="displayPage" access="remote">
         <cfquery name="forDisplay">
-            select * from PageTable;
+            select PageId, PageName,Description from PageTable;
         </cfquery>
         <cfset session.sessVar = true>
         <cfif session.sessVar>
             <cfreturn forDisplay>
         <cfelse>
-            <cflocation  url="newLogin.cfm">
+            <cflocation  url="../view/newLogin.cfm">
         </cfif>
     </cffunction>
 
     <cffunction  name="logout" access="remote">
         <cfset structDelete(session, "sessVar")>
         <cfset session.sessVar=false>
-        <cflocation  url="../newLogin.cfm">
+        <cflocation  url="../view/newLogin.cfm">
     </cffunction>
 
     <!---add/edit begins--->
@@ -113,7 +110,7 @@
             delete from PageTable
             where pageId=<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
         </cfquery>
-        <cflocation url="../adminPageView.cfm">
+        <cflocation url="../view/adminPageView.cfm">
     </cffunction>
 
     <!---<cffunction name="containsSpecialChars" returntype="boolean" output="false">
