@@ -10,6 +10,7 @@
     <cfset variables.Description=editPage.Description>
 </cfif>
 
+
 <cfif structKeyExists(form,"submit")>
     <cfif structKeyExists(form,"PageId") AND isNumeric(form.PageId)>
         <cfif structKeyExists(form,"pageName") AND structKeyExists(form,"pageDes")>
@@ -60,9 +61,12 @@
         </cfif>
      </cfif>
 
-        <cfif variables.errors EQ ''>
+    
+        
+       <cfif variables.errors EQ ''>
             <cfif structKeyExists(form,"pageName")>
                 <cfset variables.savePage=createObject("component","CFC/pages").savePage(form.pageName,form.pageDes,form.PageId)>
+
             </cfif>
         </cfif>
 </cfif>

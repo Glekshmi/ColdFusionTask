@@ -1,4 +1,4 @@
-  <cfinclude  template="../controllers/action.cfm"> 
+  <cfinclude  template="../controllers/pages.cfc"> 
   <cfinclude  template="header.cfm">
   <cfinclude  template="navbar.cfm">
  
@@ -11,7 +11,9 @@
 
       <div class="container" data-aos="fade-up" id="addPageContainer">
         <cfoutput>
-          <p class="savePage">#variables.savePage#</p>
+          <!---<p class="savePage">#variables.savePage#</p>--->
+          <p id="pageSuccess" style="color:green;"></p>
+          <p id="pageFailed" style="color:red;"></p>
         </cfoutput>
         <div class="loginSection">
         <div class="loginHeader">
@@ -19,15 +21,17 @@
         </div>
         <cfoutput>
           <p id="nameError" style="color:red;">#variables.errors#</p>
+          
           <div class="loginBody">
               <form action="" method="post" id="formName">
-                  <input type="hidden" name="PageId" value="#variables.PageId#">
+                  <input type="hidden" name="PageId" value="#variables.PageId#" id="pageId">
                   <label class="labelField">Enter Page Name</label><br>
                   <input type="text" name="pageName"  value="#variables.PageName#" class="inputField" id="pageName"><br><br>
                   <label class="labelField">Enter Description</label><br>
                   <textarea name="pageDes"  class="inputField" id="pageDes">#variables.Description#</textarea>
                   <div class="submitButton">
-                    <br><input type="submit" value="Submit"  name="submit" class="addSubmitBtn">
+                    <br>
+                    <button type="submit" name="submit" id="addPageBtn" class="addSubmitBtn">Submit</button>
                   </div>
               </form>
           </div>
