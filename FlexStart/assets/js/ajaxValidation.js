@@ -1,10 +1,12 @@
 $(document).ready(function(){
     $('#loginSubmit').click(function(){
-        var userName = $('#userName').val();
-        var password = $('#password').val();
-        if (userName.trim() === '' || password.trim() === '') {
-            alert('fill all the fields!');
-            return;
+        var userName = $('#userName').val().trim();
+        var password = $('#password').val().trim();
+       
+        if (userName === '' || password === '') {
+            $("#errorDisplay").text("fill all the fields!");
+           return false;
+
         }
        
         $.ajax({
@@ -13,16 +15,18 @@ $(document).ready(function(){
             data: {userName:userName,password:password},
             dataType:'JSON',
             success: function(response) {
-                console.log(response);
                 var msg = response.message;
                 if (msg == "exists") {
+                    $("#successDisplay").html("Succesfully logged in!");
                     setTimeout(function(){
-
+                        
                         window.location.href="../view/adminHome.cfm";
+
                     },1000
                 );
+
                 } else { 
-                     alert("invalid username or password!");
+                     $("#errorDisplay").html("invalid username or password!");
                 }
                 
             },
@@ -31,7 +35,9 @@ $(document).ready(function(){
             }
             
         });
-
+        return false;
     });
-    return false;
+    
+    
+
 });

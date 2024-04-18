@@ -24,7 +24,7 @@
             <div class="box">
               <h3 style="color: #07d5c0;">Can add books</h3>
              
-              <img src="assets/img/Add_to_reading_list-512.webp" class="img-fluid" alt="">
+              <img src="../assets/img/Add_to_reading_list-512.webp" class="img-fluid" alt="">
               <ul>
                 <li>You can add the name of books and its description</li>
               </ul>
@@ -35,7 +35,7 @@
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
               <h3 style="color: #07d5c0;">Can read books</h3>
-              <img src="assets/img/content-front-page-open-book.png" class="img-fluid" alt="">
+              <img src="../assets/img/content-front-page-open-book.png" class="img-fluid" alt="">
               <ul>
                 <li>You can read the books and its description</li>
               </ul>
@@ -45,7 +45,7 @@
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="box">
               <h3 style="color: #07d5c0;">Can edit books</h3>
-              <img src="assets/img/images (1).png" class="img-fluid" alt="">
+              <img src="../assets/img/images (1).png" class="img-fluid" alt="">
               <ul>
                 <li>You can edit the book names and its description</li>
               </ul>
@@ -55,7 +55,7 @@
           <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
             <div class="box ">
               <h3 style="color: #07d5c0;">Can remove books</h3>
-              <img src="assets/img/50665230-remove-book-icon.jpg" class="img-fluid" alt="">
+              <img src="../assets/img/50665230-remove-book-icon.jpg" class="img-fluid" alt="">
               <ul>
                 <li>you can remove the book from your list</li>
               </ul>

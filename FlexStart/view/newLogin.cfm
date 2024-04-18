@@ -36,17 +36,19 @@
                   <form action="" method="post">
                     <h2>Login</h2>
                       <div class="input-field">
-                      <input type="text" name="userName" id="userName" required>
-                      <label for="userName">Enter your username</label>
+                      <input type="text" name="userName" id="userName">
+                      <label for="userName" id="userName">Enter your username</label>
                     </div>
                     <div class="input-field">
-                      <input type="password" name="password" id="password" required>
-                      <label for="password" name="password">Enter your password</label>
+                      <input type="password" name="password" id="password" >
+                      <label for="password" name="password" id="password">Enter your password</label>
                     </div>
              
                     <input type="hidden" name="action"><br><br>
                     <button type="submit" id="loginSubmit">Log In</button>
                   </form>
+                  <p id="successDisplay" style="color:green;"></p>
+                  <p id="errorDisplay" style="color:red;"></p>
                 </div>              
               </div>
             </div>
@@ -57,7 +59,7 @@
                         <cfinvokeargument name="userName" value="#form.userName#">
                         <cfinvokeargument name="password" value="#form.password#">
                     </cfinvoke>
-                    <div class="errorDisplay">#result#!</div>
+                    
                 </cfif>
             </cfoutput>
   

@@ -5,7 +5,7 @@
         </cfif>
     </cffunction>
 
-    <cffunction name="doLogin" access="remote" returntype="JSON" returnformat="JSON">
+    <cffunction name="doLogin" access="remote" returnformat="JSON">
         <cfargument name="userName" required="true">
         <cfargument name="password" required="true">
         <cfquery name="checkLogin" result="loginCheck">
@@ -23,9 +23,9 @@
             <cfif checkRole.Role EQ "admin" OR checkRole.Role EQ "editor" OR checkRole.Role EQ "user">
                 <!---<cfset session.sessVar = true>--->
                 <cfreturn {"message":"exists"}>
-            <cfelse>
-                <cfreturn {"message":"not exists"}>
             </cfif>
+        <cfelse>
+                <cfreturn {"message":"not exists"}>
         </cfif>
     </cffunction>
 
@@ -62,33 +62,40 @@
         </cfif>
     </cffunction>
 
-    <cffunction name="savePage" access="remote" retrunType="string">
+    <cffunction name="savePage" access="remote" returntype="json">
             <cfargument name="pageName" required="true">
             <cfargument name="pageDes" required="true">
             <cfargument name="pageId" required="true">
             <cfif arguments.pageId GT 0>
-                <cfquery name="updatePage">
+                <cfquery name="updatePage" result="up"> 
                     update PageTable set PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
                     Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
                     where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
                 </cfquery>
-                <cfreturn "page is updated"> 
+                <!---<cfreturn "page is updated">
+                <cfdump  var="#up#">---> 
+                <cfreturn {"success":true,"message":"page has been successfully updated!"}>
             <cfelse>
                 <cfquery name="pageCheck">
                     select 1 from PageTable
                     where PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">
                 </cfquery>
                 <cfif pageCheck.recordCount>
-                    <cfreturn "page is already present" >
+                    <!---<cfreturn "page is already present" >--->
+                    <cfdump  var="#isJSON('{\"success\":\"false\",\"message\":\"page is already present!\"}')#" abort>
+                    
+                    <cfreturn {"success":false,"message":"page is already present!"}>
                 <cfelse>
-                    <cfquery name="insertPage">
+                    <cfquery name="insertPage" result="ins">
                         insert into PageTable (PageName,Description)
                         values(
                             <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
                             <cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
                         )
                     </cfquery>
-                    <cfreturn "inserted new page">
+                    <!---<cfdump  var="#ins#">
+                    <cfreturn "inserted new page">--->
+                    <cfreturn {"success":true,"msg":"page is not present!"}>
                 </cfif>
             </cfif>
         </cffunction>

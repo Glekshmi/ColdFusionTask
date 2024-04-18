@@ -1,11 +1,56 @@
 $(document).ready(function(){
-	var errorMsg='';
-	
-    $('form').submit(function(){
 
+	$('#addPageBtn').click(function(){
+        var pageName = $('#pageName').val().trim();
+        var pageDes = $('#pageDes').val().trim();
+        var pageId = $('#pageId').val();
+		
+		if (validate()){
+			
+			
+			$.ajax({
+				url:"../model/pages.cfc?method=savePage",
+				type:'post',
+				data: {pageName:pageName,pageDes:pageDes,pageId:pageId},
+				dataType:'JSON',
+				success: function(response) {
+					var msg = response.msg;
+					var success = response.success;
+					console.log(msg);
+					if(success=="true") {
+						
+						setTimeout(function(){
+							$("#pageSuccess").html(msg);
+							window.location.href="../view/adminPageView.cfm";
+						},1000
+					);
+					}	
+					else { 
+						
+						setTimeout(function(){
+							$("#pageFailed").html(msg);
+							window.location.href="../view/adminPageView.cfm";
+						},1000
+					);
+					}
+					
+				},
+				error: function(xhr, status, error) {
+					alert("An error occurred in ajax:"+error);
+				}
+				
+			});
+			return false;
+		}
+        
+    });
+
+
+
+	function validate(){
+		var errorMsg='';
         var Name = $('#pageName').val().trim();
         var Description = $('#pageDes').val().trim();
-    	var alphaNumeric = "/^(?![0-9]*$)[a-zA-Z0-9]+$/";
 		
         if (Name == '') {
 			
@@ -27,11 +72,15 @@ $(document).ready(function(){
 		else
 			errorMsg+='';
         
-		if(errorMsg == '')
-			return true;
-		else{
+		if(errorMsg != ''){
 			$("#nameError").html(errorMsg);
 			return false;
 		}
-	});
+			return true;
+
+	};
+
 });
+
+
+

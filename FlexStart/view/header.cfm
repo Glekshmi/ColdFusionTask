@@ -9,8 +9,9 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
   <script src="../assets/js/jqueryFile.js"></script>
-  <script src="../assets/js/validation.js"></script>
   <script src="../assets/js/ajaxValidation.js"></script>
+  <script src="../assets/js/validation.js"></script>
+  
   
 
   <link href="../assets/img/favicon.png" rel="icon">

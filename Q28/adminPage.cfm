@@ -56,7 +56,17 @@
         
         </cfoutput>
         </div>
-
+<cfif variables.errors EQ ''>
+            <cffunction  name="saveActionPage" access="remote" returntype="json" returnformat="json">
+                <cfargument  name="pageName" required="true">
+                <cfargument  name="pageDes" required="true">
+                <cfargument  name="pageId" required="true">
+                
+                <cfset variables.savePages=createObject("component","CFC/pages")>
+                <cfset variables.success = #variables.savePages.savePage(arguments.pageName,arguments.pageDes,arguments.pageId)#>
+                <cfreturn variables.success>
+            </cffunction>
+        </cfif>
 
    
 
