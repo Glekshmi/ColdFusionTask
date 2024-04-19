@@ -62,7 +62,7 @@
         </cfif>
     </cffunction>
 
-    <cffunction name="savePage" access="remote" returntype="json">
+    <cffunction name="savePage" access="remote" returntype="string">
             <cfargument name="pageName" required="true">
             <cfargument name="pageDes" required="true">
             <cfargument name="pageId" required="true">
@@ -72,19 +72,16 @@
                     Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
                     where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
                 </cfquery>
-                <!---<cfreturn "page is updated">
-                <cfdump  var="#up#">---> 
-                <cfreturn {"success":true,"message":"page has been successfully updated!"}>
+                <cfreturn "page is updated">
+                <!---<cfdump  var="#up#">---> 
             <cfelse>
                 <cfquery name="pageCheck">
                     select 1 from PageTable
                     where PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">
                 </cfquery>
                 <cfif pageCheck.recordCount>
-                    <!---<cfreturn "page is already present" >--->
-                    <cfdump  var="#isJSON('{\"success\":\"false\",\"message\":\"page is already present!\"}')#" abort>
-                    
-                    <cfreturn {"success":false,"message":"page is already present!"}>
+                    <cfreturn "page is already present" >
+                    <!---<cfdump  var="#isJSON('{\"success\":\"false\",\"message\":\"page is already present!\"}')#" abort>--->
                 <cfelse>
                     <cfquery name="insertPage" result="ins">
                         insert into PageTable (PageName,Description)
@@ -94,8 +91,8 @@
                         )
                     </cfquery>
                     <!---<cfdump  var="#ins#">
-                    <cfreturn "inserted new page">--->
-                    <cfreturn {"success":true,"msg":"page is not present!"}>
+                    <cfreturn {"success":"true","msg":"page is not present!"}>--->
+                    <cfreturn "inserted new page">
                 </cfif>
             </cfif>
         </cffunction>
@@ -111,13 +108,20 @@
         <cfreturn forDisplay>
     </cffunction>
 
-    <cffunction name="deleteRow" access="remote">
+    <cffunction name="deleteRow" access="remote" returnformat="json">
         <cfargument name="idPage" required="true">
-        <cfquery name="delete">
+        <cfquery name="delete" result="delResult">
             delete from PageTable
             where pageId=<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
         </cfquery>
-        <cflocation url="../view/adminPageView.cfm">
+
+        <cfif delResult.recordCount>
+            <cfreturn {"success":"true","msg":"page is deleted!"}>
+        <cfelse>
+            <cfreturn {"success":"false","msg":"page is unavailable!"}>
+        </cfif>
+
+        <!---<cflocation url="../view/adminPageView.cfm">--->
     </cffunction>
 
     <!---<cffunction name="containsSpecialChars" returntype="boolean" output="false">

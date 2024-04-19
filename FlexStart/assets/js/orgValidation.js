@@ -5,14 +5,14 @@ $(document).ready(function(){
         var pageName = $('#pageName').val().trim();
         var pageDes = $('#pageDes').val().trim();
         var pageId = $('#pageId').val();
-		alert(pageId);
-
+		
 		if (validate()){
 			
+			
 			$.ajax({
-				url:"../CFC_controllers/pages.cfc?method=pageValidation",
+				url:"../model/pages.cfc?method=savePage",
 				type:'post',
-				data: {pageId:pageId,pageName:pageName,pageDes:pageDes},
+				data: {pageName:pageName,pageDes:pageDes,pageId:pageId},
 				dataType:'json',
 				success: function(response) {
 					var msg = response.msg;
