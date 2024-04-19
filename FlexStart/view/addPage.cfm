@@ -1,4 +1,4 @@
-  <cfinclude  template="../controllers/pages.cfc"> 
+  <cfinclude  template="../controllers/action.cfm"> 
   <cfinclude  template="header.cfm">
   <cfinclude  template="navbar.cfm">
  

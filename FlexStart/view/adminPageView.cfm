@@ -24,6 +24,9 @@
                     </div>
                 </div>
 
+                <p id="pageSuccess" style="color:green;"></p>
+                <p id="pageFailed" style="color:red;"></p>
+
                 <table class="table table-bordered">
                 <cfif session.userRole === 'user'>
                 <thead>
@@ -59,7 +62,7 @@
                                 <td>#Description#</td>
                                 <td colspan="4">
                                 <a href="../view/addPage.cfm?idPage=#pageId#"><span class="material-symbols-outlined">edit</span></a>
-                                <a href="../model/pages.cfc?method=deleteRow&idPage=#pageId#"><span class="material-symbols-outlined">delete</span></a></td>
+                                <a href="" data-pageId="#pageId#" class="deleteId"><span class="material-symbols-outlined">delete</span></a></td>
                             </tr>
                         </cfloop>   
                     </tbody>                
