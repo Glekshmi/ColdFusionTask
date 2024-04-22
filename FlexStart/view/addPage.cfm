@@ -14,13 +14,15 @@
           <!---<p class="savePage">#variables.savePage#</p>--->
           <p id="pageSuccess" style="color:green;"></p>
           <p id="pageFailed" style="color:red;"></p>
+          <p id="nameError" style="color:red;"></p>
         </cfoutput>
         <div class="loginSection">
         <div class="loginHeader">
             <h2 class="loginText" style="color: #4154f1;">Save Page</h2>
         </div>
+        
         <cfoutput>
-          <p id="nameError" style="color:red;">#variables.errors#</p>
+          
           
           <div class="loginBody">
               <form action="" method="post" id="formName">

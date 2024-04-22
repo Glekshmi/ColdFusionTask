@@ -62,41 +62,49 @@
         </cfif>
     </cffunction>
 
-    <cffunction name="savePage" access="remote" returntype="string">
-            <cfargument name="pageName" required="true">
-            <cfargument name="pageDes" required="true">
-            <cfargument name="pageId" required="true">
-            <cfif arguments.pageId GT 0>
-                <cfquery name="updatePage" result="up"> 
-                    update PageTable set PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
-                    Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
-                    where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
-                </cfquery>
-                <cfreturn "page is updated">
-                <!---<cfdump  var="#up#">---> 
+    <!--- check page exist begins--->
+    <cffunction name="checkPageExist" access="remote" returntype="string">
+        <cfargument name="pageName" required="true">
+            <cfquery name="pageCheck">
+                select 1 from PageTable
+                where PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">
+            </cfquery>
+            <!---<cfdump  var="#pageCheck.recordCount#">--->
+            <cfif pageCheck.recordCount EQ 0>
+                <cfreturn false>
+                <!---<cfdump  var="#isJSON('{\"success\":\"false\",\"message\":\"page is already present!\"}')#" abort>--->
             <cfelse>
-                <cfquery name="pageCheck">
-                    select 1 from PageTable
-                    where PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">
-                </cfquery>
-                <cfif pageCheck.recordCount>
-                    <cfreturn "page is already present" >
-                    <!---<cfdump  var="#isJSON('{\"success\":\"false\",\"message\":\"page is already present!\"}')#" abort>--->
-                <cfelse>
-                    <cfquery name="insertPage" result="ins">
-                        insert into PageTable (PageName,Description)
-                        values(
-                            <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
-                            <cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
-                        )
-                    </cfquery>
-                    <!---<cfdump  var="#ins#">
-                    <cfreturn {"success":"true","msg":"page is not present!"}>--->
-                    <cfreturn "inserted new page">
-                </cfif>
+                <cfreturn true>
             </cfif>
-        </cffunction>
-    
+    </cffunction>
+    <!---check page exist end --->
+
+    <cffunction name="savePage" access="remote" returntype="string">
+        <cfargument name="pageName" required="true">
+        <cfargument name="pageDes" required="true">
+        <cfargument name="pageId" required="true">
+        <cfif arguments.pageId GT 0>
+            <cfquery name="updatePage" result="up"> 
+                update PageTable set PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
+                Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
+                where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
+            </cfquery>
+            <cfreturn "page is updated">
+            <!---<cfdump  var="#up#">---> 
+        <cfelse>
+            <cfquery name="insertPage" result="ins">
+                insert into PageTable (PageName,Description)
+                values(
+                    <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">,
+                    <cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
+                )
+            </cfquery>
+            <!---<cfdump  var="#ins#">
+            <cfreturn {"success":"true","msg":"page is not present!"}>--->
+            <cfreturn "inserted new page">
+        </cfif>
+    </cffunction>
+
     <!---add/edit ends--->
 
     <cffunction name="viewData" access="remote">

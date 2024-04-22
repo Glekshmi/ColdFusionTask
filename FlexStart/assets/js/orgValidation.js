@@ -5,18 +5,20 @@ $(document).ready(function(){
         var pageName = $('#pageName').val().trim();
         var pageDes = $('#pageDes').val().trim();
         var pageId = $('#pageId').val();
-		
+		//alert(pageId);
+
 		if (validate()){
 			
-			
 			$.ajax({
-				url:"../model/pages.cfc?method=savePage",
+				url:"../controllers/pages.cfc?method=savePage",
 				type:'post',
-				data: {pageName:pageName,pageDes:pageDes,pageId:pageId},
+				data: {pageId:pageId,pageName:pageName,pageDes:pageDes},
 				dataType:'json',
 				success: function(response) {
 					var msg = response.msg;
 					var success = response.success;
+					//alert(msg);
+					//alert(success);
 					if(success=="true") {
 						$("#pageSuccess").html(msg);
 						setTimeout(function(){
@@ -40,7 +42,7 @@ $(document).ready(function(){
 			});
 			return false;
 		}
-        
+        return false;
     });
 
 	function validate(){
@@ -51,30 +53,34 @@ $(document).ready(function(){
         if (Name == '') {
 			
 			errorMsg+='Please enter page name!'+"<br>";
+			alert(errorMsg);
         }
 		else if (/\d/.test(Name)) {
             errorMsg+='page name should contain alphabets only!'+"<br>";
+			//alert(errorMsg);
         }
 		else
 			errorMsg+='';
+			//alert("no error");
 		
         if (Description == '') {
             errorMsg+='Please enter page description!'+"<br>";
-			
+			//alert(errorMsg);
         }
 		else if (!isNaN(Description)) {
             errorMsg+='page description should not contain digits only!'+"<br>";
+			//alert(errorMsg);
         }
 		else
 			errorMsg+='';
-        
+			//alert("no error");
 		if(errorMsg != ''){
 			$("#nameError").html(errorMsg);
 			return false;
 		}
-		else
+		else{
 			return true;
-
+		}
 	};
 	//add end
 
