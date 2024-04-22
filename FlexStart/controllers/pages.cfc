@@ -1,5 +1,6 @@
 <cfcomponent>
-    <cffunction  name="savePage" access="remote" returnformat="string">
+
+    <cffunction  name="savePage" access="remote" returnformat="json">
         <cfargument  name="pageId" required="true">
         <cfargument  name="pageName" required="true">
         <cfargument  name="pageDes" required="true">
@@ -23,12 +24,17 @@
             <cfset local.errors &= ''>
         </cfif>
 
+        <cfif len(arguments.pageName) GT 5>
+            <cfset local.errors &= "Exceeded maximum length"&"<br>">
+        <cfelse>
+            <cfset local.errors &= ''>
+        </cfif>        
+
         <cfif local.errors EQ ''>
             <cfset variables.savePage=createObject("component","CFC/pages").savePage(arguments.pageName,arguments.pageDes,arguments.PageId)>
-            <cfreturn {"success":"true","msg":"page saved successfully"}>
+            <cfreturn {"success":"true","msg":"#variables.savePage#"}>
         <cfelse>
-            <cfreturn {"success":"false","msg":"page is not present"}>
+            <cfreturn {"success":"false","msg":"#local.errors#"}>
         </cfif>
-        <cfreturn local.errors>
     </cffunction>
 </cfcomponent>

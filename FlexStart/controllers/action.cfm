@@ -3,6 +3,8 @@
 <cfset variables.Description=''>
 <cfset variables.errors =''>
 <cfset variables.savePage = ''>
+
+
 <cfif structKeyExists(url,"idPage") AND url.idPage GT 0>
     <cfset variables.editPage=createObject("component","CFC/pages").editPage(url.idPage)>
     <cfset variables.PageId=url.idPage>
