@@ -1,11 +1,11 @@
 <cfcomponent>
     <cffunction  name="login" access="public">
-        <cfif session.sessVar EQ true>
+        <cfif session.sessVar EQ true><!---what is this variable? correct the variable name for readability--->
             <cflocation  url="../view/adminHome.cfm">
         </cfif>
     </cffunction>
 
-    <cffunction name="doLogin" access="remote" returnformat="JSON">
+    <cffunction name="doLogin" access="remote" returnformat="JSON"><!---only one query needed, align code properly--->
         <cfargument name="userName" required="true">
         <cfargument name="password" required="true">
         <cfquery name="checkLogin" result="loginCheck">
@@ -29,32 +29,31 @@
         </cfif>
     </cffunction>
 
-    <cffunction name="displayPage" access="remote">
+    <cffunction name="displayPage" access="remote"><!---code is confusing--->
         <cfquery name="forDisplay">
             select PageId, PageName,Description from PageTable;
         </cfquery>
-        <cfset session.sessVar = true>
+        <cfset session.sessVar = true><!---line 37 checks for variable set in line 36--->
         <cfif session.sessVar>
             <cfreturn forDisplay>
         <cfelse>
-            <cflocation  url="../view/newLogin.cfm">
+            <cflocation  url="../view/newLogin.cfm"><!---convert redirect to login to a function and use everywhere--->
         </cfif>
     </cffunction>
 
-    <cffunction  name="logout" access="remote">
-        <cfset structDelete(session, "sessVar")>
-        <cfset session.sessVar=false>
-        <cflocation  url="../view/newLogin.cfm">
+    <cffunction name="logout" access="remote">
+        <cfset structDelete(session, "sessVar")><!---?--->
+        <cfset session.sessVar=false><!--- why delete and then set?--->
+        <cflocation  url="../view/newLogin.cfm"><!---use common redirect function--->
     </cffunction>
 
-    <!---add/edit begins--->
     <cffunction name="editPage" access="remote">
-        <cfargument name="idPage" required="true">
+        <cfargument name="idPage" required="true" type="string"><!---the name should be pageID--->
         <cfquery name="check">
             select PageName,Description from PageTable 
             where pageId=<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
         </cfquery>
-        <cfset pageId = #arguments.idPage#>
+        <!---<cfset pageId = #arguments.idPage#>--->
         <cfif check.recordCount EQ 1>
             <cfreturn check>
         <cfelse>
@@ -62,22 +61,30 @@
         </cfif>
     </cffunction>
 
-    <!--- check page exist begins--->
-    <cffunction name="checkPageExist" access="remote" returntype="string">
+    <cffunction name="checkPageExist" access="remote" returntype="boolean">
         <cfargument name="pageName" required="true">
-            <cfquery name="pageCheck">
-                select 1 from PageTable
-                where PageName=<cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">
-            </cfquery>
-            <!---<cfdump  var="#pageCheck.recordCount#">--->
-            <cfif pageCheck.recordCount EQ 0>
-                <cfreturn false>
-                <!---<cfdump  var="#isJSON('{\"success\":\"false\",\"message\":\"page is already present!\"}')#" abort>--->
-            <cfelse>
-                <cfreturn true>
-            </cfif>
+        <cfargument name="pageId" required="true">
+
+        <cfquery name="qryCheckPageExist">
+            select PageName from PageTable
+            where
+            <!--- 1 = 
+                case when PageName = <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar"> 
+                        AND PageId = <cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
+                        then 0
+                    when PageName = <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar">  
+                        then 1
+                    else 0
+                end--->
+            PageName = <cfqueryparam value="#arguments.pageName#" cfsqltype="cf_sql_varchar"> 
+            AND PageId != <cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer"> 
+        </cfquery>   
+        <cfif qryCheckPageExist.recordCount>
+            <cfreturn true>
+        <cfelse>
+            <cfreturn false>
+        </cfif>
     </cffunction>
-    <!---check page exist end --->
 
     <cffunction name="savePage" access="remote" returntype="string">
         <cfargument name="pageName" required="true">
@@ -89,8 +96,7 @@
                 Description=<cfqueryparam value="#arguments.pageDes#" cfsqltype="cf_sql_varchar">
                 where pageId=<cfqueryparam value="#arguments.pageId#" cfsqltype="cf_sql_integer">
             </cfquery>
-            <cfreturn "page is updated">
-            <!---<cfdump  var="#up#">---> 
+            <cfreturn "page is updated successfully">
         <cfelse>
             <cfquery name="insertPage" result="ins">
                 insert into PageTable (PageName,Description)
@@ -101,22 +107,20 @@
             </cfquery>
             <!---<cfdump  var="#ins#">
             <cfreturn {"success":"true","msg":"page is not present!"}>--->
-            <cfreturn "inserted new page">
+            <cfreturn "new page is inserted successfully">
         </cfif>
     </cffunction>
 
-    <!---add/edit ends--->
-
-    <cffunction name="viewData" access="remote">
+    <cffunction name="viewPageNameAndDescription" access="remote" returntype="query">
         <cfargument name="idPage">
         <cfquery name="forDisplay">
-            select * from PageTable
+            select PageName,Description from PageTable
             where pageId =<cfqueryparam value="#arguments.idPage#" cfsqltype="cf_sql_integer">
         </cfquery>
         <cfreturn forDisplay>
     </cffunction>
 
-    <cffunction name="deleteRow" access="remote" returnformat="json">
+    <cffunction name="deletePage" access="remote" returnformat="json">
         <cfargument name="idPage" required="true">
         <cfquery name="delete" result="delResult">
             delete from PageTable
@@ -128,8 +132,6 @@
         <cfelse>
             <cfreturn {"success":"false","msg":"page is unavailable!"}>
         </cfif>
-
-        <!---<cflocation url="../view/adminPageView.cfm">--->
     </cffunction>
 
     <!---<cffunction name="containsSpecialChars" returntype="boolean" output="false">

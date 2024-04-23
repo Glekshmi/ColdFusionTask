@@ -1,17 +1,19 @@
 component {
     
-    remote any function checkPageExist(pageName) returnFormat="JSON" {
+    remote string function checkPageExist(pageName,pageId) returnFormat="JSON" {
         local.pageName = arguments.pageName;
+        local.pageId = arguments.pageId;
         local.checkPage = '';
-        local.checkPage = createObject("component", "CFC/pages").checkPageExist(local.pageName);
+        local.checkPage = createObject("component", "CFC/pages").checkPageExist(local.pageName,local.pageId);
         local.jsonResponse = {};
         
+
         if(local.checkPage) {
             local.jsonResponse["success"] = "true";
-            local.jsonResponse["msg"] = "page is present";
+            local.jsonResponse["msg"] = "page is already exist";
         } else {
             local.jsonResponse["success"] = "false";
-            local.jsonResponse["msg"] = "page is not present";
+            local.jsonResponse["msg"] = "page is not exist";
         }
         return serializeJSON(local.jsonResponse);
     }

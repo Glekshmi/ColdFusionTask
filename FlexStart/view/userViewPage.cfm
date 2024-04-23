@@ -20,7 +20,7 @@
         <cfset local.idPage=url.idPage>
         
         <cfset local.demo=createObject("component","CFC/pages")>
-        <cfset local.display=#local.demo.viewData(local.idPage)#>
+        <cfset local.display=#local.demo.viewPageNameAndDescription(local.idPage)#>
         <table class="table mb-5 pb-5">
             <thead>
                 <tr>
