@@ -1,14 +1,14 @@
 <cfcomponent>
-
+<!---only local scope needed in this page--->
     <cffunction  name="savePage" access="remote" returnformat="json">
-        <cfargument  name="pageId" required="true">
-        <cfargument  name="pageName" required="true">
-        <cfargument  name="pageDes" required="true">
+        <cfargument  name="pageId" required="true" type="string"><!---specify correct type expected--->
+        <cfargument  name="pageName" required="true" type="string">
+        <cfargument  name="pageDes" required="true" type="string">
 
-        <cfset aplabetsOnly = "/^[A-Za-z]+$/">
+        <cfset alphabetsOnly = "/^[A-Za-z]+$/"><!---spelling mistake--->
         <cfset alphaNumeric = "/^(?![0-9]*$)[a-zA-Z0-9]+$/">
         <cfset local.errors =''>
-        <cfif arguments.pageName EQ ''>
+        <cfif arguments.pageName EQ ''><!---check for string length--->
             <cfset local.errors &= "page name field should not be empty"&"<br>">
         <cfelseif reFind("\d", arguments.pageName)>
             <cfset local.errors &= "page name should contain alphabets only"&"<br>">
@@ -16,7 +16,7 @@
             <cfset local.errors &= ''>
         </cfif>
 
-        <cfif form.pageDes  EQ ''>
+        <cfif form.pageDes  EQ ''><!---use correct variable name--->
             <cfset local.errors &= "page description field should not be empty"&"<br>">
         <cfelseif isNumeric(arguments.pageDes)>
             <cfset local.errors &= "page description should not contain digits only"&"<br>">

@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-	//add begin
 	$('#formName').submit(function(){
         var pageName = $('#pageName').val().trim();
         var pageDes = $('#pageDes').val().trim();
@@ -12,7 +11,7 @@ $(document).ready(function(){
 			$.ajax({
 				url:"../controllers/pagess.cfc?method=checkPageExist",
 				type:'post',
-				data: {pageName:pageName},
+				data: {pageName:pageName,pageId:pageId},
 				dataType:'json',
 				success: function(response) {
 					//alert(response.success);
@@ -75,45 +74,6 @@ $(document).ready(function(){
 		return false;
     });
 
-	function validate(){
-		var errorMsg='';
-        var Name = $('#pageName').val().trim();
-        var Description = $('#pageDes').val().trim();
-
-        if (Name == '') {
-			
-			errorMsg+='Please enter page name!'+"<br>";
-			alert(errorMsg);
-        }
-		else if (/\d/.test(Name)) {
-            errorMsg+='page name should contain alphabets only!'+"<br>";
-			//alert(errorMsg);
-        }
-		else
-			errorMsg+='';
-			//alert("no error");
-		
-        if (Description == '') {
-            errorMsg+='Please enter page description!'+"<br>";
-			//alert(errorMsg);
-        }
-		else if (!isNaN(Description)) {
-            errorMsg+='page description should not contain digits only!'+"<br>";
-			//alert(errorMsg);
-        }
-		else
-			errorMsg+='';
-			//alert("no error");
-		if(errorMsg != ''){
-			$("#nameError").html(errorMsg);
-			return false;
-		}
-		else{
-			return true;
-		}
-	};
-	//add end
-
 	//delete begin	
 	$('.deleteId').click(function(){
 		var idPage = $(this).attr('data-pageId');
@@ -122,7 +82,7 @@ $(document).ready(function(){
 		if(confirmDelete())
 		{
 			$.ajax({
-				url:"../model/pages.cfc?method=deleteRow",
+				url:"../model/pages.cfc?method=deletePage",
 				type:'post',
 				data: {idPage:idPage},
 				dataType:'json',
@@ -144,17 +104,53 @@ $(document).ready(function(){
 		
     });
 
-	function confirmDelete() {
-		if (confirm("Are you sure want to delete this article?")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+
 
 	//delete ends
 
 });
 
+function validate(){
+	var errorMsg='';
+	var Name = $('#pageName').val().trim();
+	var Description = $('#pageDes').val().trim();
 
+	if (Name == '') {
+		
+		errorMsg+='Please enter page name!'+"<br>";
+		alert(errorMsg);
+	}
+	else if (/\d/.test(Name)) {
+		errorMsg+='page name should contain alphabets only!'+"<br>";
+		//alert(errorMsg);
+	}
+	else
+		errorMsg+='';
+		//alert("no error");
 
+	if (Description == '') {
+		errorMsg+='Please enter page description!'+"<br>";
+		//alert(errorMsg);
+	}
+	else if (!isNaN(Description)) {
+		errorMsg+='page description should not contain digits only!'+"<br>";
+		//alert(errorMsg);
+	}
+	else
+		errorMsg+='';
+		//alert("no error");
+	if(errorMsg != ''){
+		$("#nameError").html(errorMsg);
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+function confirmDelete() {
+	if (confirm("Are you sure want to delete this article?")) {
+		return true;
+	} else {
+		return false;
+	}
+}

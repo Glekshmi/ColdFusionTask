@@ -73,7 +73,7 @@
   }
   #addPageContainer{
     position: relative;
-      left: 29%;
+      left: 41%;
       top: 54px;
   }
   .addSubmitBtn{
@@ -2552,6 +2552,9 @@
 #addRow{
     position: relative;
     left: 70%;
+}
+#addNewBtn{
+  color:white;
 }
 .table-wrapper {
     width: 700px;

@@ -18,7 +18,7 @@
                                 <!---<form action="addPage.cfm" method="post">
                                     <input type="submit" value="Add" name="submit" class="btn add-new">
                                 </form>--->
-                                <button type="button" class="btn btn-info add-new"><a href="addPage.cfm">Add New</a></button>
+                                <button type="button" class="btn btn-info add-new"><a href="addPage.cfm" id="addNewBtn">Add New</a></button>
                             </div>
                         </cfif>
                     </div>
