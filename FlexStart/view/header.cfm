@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>FlexStart Bootstrap Template - Index</title>
+  <title>Wisdom Web</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
   <script src="../assets/js/jqueryFile.js"></script>
@@ -30,9 +30,6 @@
 
  
   <link href="../assets/css/styles.css" rel="stylesheet">
-  <!--<link href="../assets/css/table.css" rel="stylesheet">
-  <link href="../assets/css/login.css" rel="stylesheet">
-  <link href="../assets/css/icon.css" rel="stylesheet">-->
  
 </head>
 

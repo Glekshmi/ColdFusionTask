@@ -2,18 +2,18 @@
 <cfinclude  template="header.cfm">
 
   
-  <!-- ======= Hero Section ======= -->
+  
   <cfinclude  template="navbar.cfm">
 
   <main id="main">
 
-    <!-- ======= Pricing Section ======= -->
+   
     <section id="pricing" class="pricing">
 
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <!---<p>Check our Pricing</p>--->
+         
         </header>
 
         <cfif session.userRole === 'admin' or session.userRole === 'editor'>
@@ -80,7 +80,7 @@
 
       </div>
 
-    </section><!-- End Pricing Section -->
+    </section>
      <cfinclude  template="footer.cfm">
     
 

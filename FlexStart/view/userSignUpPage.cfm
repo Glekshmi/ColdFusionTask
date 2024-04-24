@@ -34,19 +34,16 @@
               <div class="wrapper">
                 <form action="" method="post">
                   <h2>Login</h2>
-                    <div class="input-field">
-                    <input type="text" name="strUserName" id="userName">
-                    <label for="userName" id="userName">Enter your username</label>
-                  </div>
-                  <div class="input-field">
-                    <input type="password" name="strPassword" id="password" >
-                    <label for="password" name="strPassword" id="password">Enter your password</label>
-                  </div>
-            
-                  <input type="hidden" name="action"><br><br>
+                    
+                    <label>Enter your name</label>
+                    <input type="text" name="name">
+                    
+                    <label>Enter your name</label>
+                    <input type="text" name="name">
+
+
                   <button type="submit" id="loginSubmit">Log In</button>
                 </form>
-                <p>Don't have any account?<a href="userSignUpPage.cfm">Sign Up</a></p>
                 <p id="successDisplay" style="color:green;"></p>
                 <p id="errorDisplay" style="color:red;"></p>
               </div>              
@@ -63,9 +60,9 @@
               </cfif>
           </cfoutput>
 
-          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+          <!---<div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
             <img src="https://t3.ftcdn.net/jpg/03/39/70/90/360_F_339709048_ZITR4wrVsOXCKdjHncdtabSNWpIhiaR7.jpg" class="img-fluid" alt="">
-          </div>
+          </div>--->
 
         </div>
       </div>

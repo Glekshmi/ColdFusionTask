@@ -43,15 +43,5 @@
 
   </section>
   
-  <!---<footer>
-    <nav id="navbar" class="navbar">
-        <ul class="footerSection">
-          <li><a class="nav-link scrollto active" href="">Home</a></li>
-          <li><a class="nav-link scrollto" href="./newLogin.cfm">Login</a></li>
-        </ul>
-      </nav>
-  <footer>
-
-  <cfinclude  template="footer.cfm">--->
   <cfinclude  template="jsStyle.cfm">
   </cfoutput>
