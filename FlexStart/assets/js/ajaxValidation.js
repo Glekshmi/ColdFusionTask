@@ -10,7 +10,7 @@ $(document).ready(function(){
         }
        
         $.ajax({
-            url:"../model/pages.cfc?method=doLogin",
+            url:"../controllers/pages.cfc?method=doLogin",
             type:'post',
             data: {userName:userName,password:password},
             dataType:'JSON',
@@ -19,9 +19,7 @@ $(document).ready(function(){
                 if (msg == "exists") {
                     $("#successDisplay").html("Succesfully logged in!");
                     setTimeout(function(){
-                        
                         window.location.href="../view/adminHome.cfm";
-
                     },1000
                 );
 

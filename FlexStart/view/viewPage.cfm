@@ -4,23 +4,20 @@
   <cfinclude  template="navbar.cfm">
 
   <main id="main">
-
-    <!-- ======= Pricing Section ======= -->
     <section id="pricing" class="pricing">
 
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <!---<p>Check our Pricing</p>--->
         </header>
 
         <div class="row gy-4" data-aos="fade-left">
 
         <cfoutput>
-        <cfset local.idPage=url.idPage>
+        <cfset local.pageId=url.pageId>
         
         <cfset local.demo=createObject("component","CFC/pages")>
-        <cfset local.display=#local.demo.viewPageNameAndDescription(local.idPage)#>
+        <cfset local.display=#local.demo.getPageDetails(local.pageId)#>
         <table class="table mb-5 pb-5">
             <thead>
                 <tr>

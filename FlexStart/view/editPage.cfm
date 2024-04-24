@@ -5,13 +5,10 @@
  
 
   <main id="main">
-
-    <!-- ======= Pricing Section ======= -->
     <section id="pricing" class="pricing">
 
       <div class="container" data-aos="fade-up" id="addPageContainer">
         <cfoutput>
-          <!---<p class="savePage">#variables.savePage#</p>--->
           <p id="pageSuccess" style="color:green;"></p>
           <p id="pageFailed" style="color:red;"></p>
           <p id="nameError" style="color:red;"></p>
@@ -28,9 +25,9 @@
               <form action="" method="post" id="formName">
                   <input type="hidden" name="PageId" value="#variables.PageId#" id="pageId">
                   <label class="labelField">Enter Page Name</label><br>
-                  <input type="text" name="pageName"  value="#variables.PageName#" class="inputField" id="pageName"><br><br>
+                  <input type="text" name="strPageName"  value="#variables.PageName#" class="inputField" id="pageName"><br><br>
                   <label class="labelField">Enter Description</label><br>
-                  <textarea name="pageDes"  class="inputField" id="pageDes">#variables.Description#</textarea>
+                  <textarea name="strPageDes"  class="inputField" id="pageDes">#variables.Description#</textarea>
                   <div class="submitButton">
                     <br>
                     <button type="submit" name="submit" id="addPageBtn" class="addSubmitBtn">Submit</button>
@@ -41,8 +38,7 @@
         
    
 
-    </section><!-- End Pricing Section -->
-
+    </section>
     <cfinclude  template="footer.cfm">
 
   <cfinclude  template="jsStyle.cfm">
