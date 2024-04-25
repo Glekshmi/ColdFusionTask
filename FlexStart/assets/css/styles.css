@@ -32,6 +32,9 @@
   h6 {
     font-family: "Nunito", sans-serif;
   }
+  .personName{
+    margin-left: 15px;
+  }
   
   /*--------------------------------------------------------------
   # Sections

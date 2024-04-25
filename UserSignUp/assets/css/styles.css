@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.container{
+    position: relative;
+    left: 40%;
+    top: 40px;
+    width: 341px;
+    height: 338px;
+    border: 1px solid #6495ed59;
+    background: floralwhite;
+}
+.header{
+    width: max-content;
+    position: relative;
+    left: 74px;
+    top: 5px;
+}
+.bodySection{
+    width: max-content;
+    position: relative;
+    top: 52px;
+    left: 26px;
+}
+.usernameField{
+    width: 162px;
+    position: relative;
+    left: 7px;
+}
+.passwordField{
+    position: relative;
+    left: 7px;
+}
+.roleField{
+    position: relative;
+    left: 18px;
+    width: 164px;
+}
+.submitBtn{
+    position: relative;
+    left: 111px;
+    padding: 5px;
+    width: 84px;
+    background: azure;
+    border: none;
+    border: 1px solid darkgray;
+    border-radius: 8px;
+    color: dimgrey;
+    font-size: medium;
+}  
+.errorSection{
+    height: 1px;
+    position: relative;
+    top:5px;
+}
+.fontColor{
+    color: dimgrey;
+}
