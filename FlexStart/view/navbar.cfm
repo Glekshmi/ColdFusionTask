@@ -11,6 +11,9 @@
           <li><a class="nav-link scrollto active" href="./adminHome.cfm">Home</a></li>
           <li><a class="nav-link scrollto" href="./listPage.cfm">View</a></li>
           <li><a class="nav-link scrollto" href="../controllers/pages.cfc?method=logout">Logout</a></li>
+          <cfoutput>
+            <span class="personName">#session.personName#</span>
+          </cfoutput>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>

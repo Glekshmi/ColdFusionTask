@@ -3,7 +3,7 @@
         <cfargument  name="strUserName" required="true">
         <cfargument  name="strPassword" required="true">
         <cfquery name="qrycheckLogin">
-            select UserId, UserName, Password, Role from UserTables
+            select UserId, UserName,Name, Password, Role from UserTables
             where UserName=<cfqueryparam value="#arguments.strUserName#" cfsqltype="cf_sql_varchar">
             AND Password=<cfqueryparam value="#arguments.strPassword#" cfsqltype="cf_sql_varchar"> 
         </cfquery>

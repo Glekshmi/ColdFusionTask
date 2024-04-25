@@ -75,6 +75,7 @@ component {
         local.qryUserExist = createObject("component","CFC/pages").checkUserLogin(strUserName=local.strUserName,strPassword=local.encryptedPassword);
         if (qryUserExist.recordCount){
             session.userRole = qryUserExist.Role;
+            session.personName = qryUserExist.Name;
             session.userLoggedIn = true;
             local.jsonResponse = {};
             if (qryUserExist.Role EQ "admin" OR qryUserExist.Role EQ "editor" OR qryUserExist.Role EQ "user"){

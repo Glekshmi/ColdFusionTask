@@ -19,8 +19,6 @@
         </div>
         
         <cfoutput>
-          
-          
           <div class="loginBody">
               <form action="" method="post" id="formName">
                   <input type="hidden" name="PageId" value="#variables.PageId#" id="pageId">
