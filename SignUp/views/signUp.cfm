@@ -3,12 +3,14 @@
       <div class="header">
         <h1 class="fontColor">Registration</h1>
         <cfoutput>
-          <p id="pageSuccess" class="errorSection"></p>
+          <p id="pageSuccess" class="errorSection">#variables.result#</p>
+          
         </cfoutput>
       </div>
       <div class="bodySection">
-        <form name="regitrationForm" action="" method="post" id="regitrationForm">
-            <label class="fontColor">Enter your name</label>
+      <cfoutput></cfoutput>
+        <form action="?action=signUp" method="post">
+            <label class="fontColor" >Enter your name</label>
             <input type="text" name="strPersonName" id="personName"><br><br>
             <label class="fontColor">Enter username  </label>
             <input type="text" name="strUsername" id="username" class="usernameField"><br><br>
@@ -23,7 +25,7 @@
               <option value="Editor">Editor</option>
               <option value="User">User</option> 
             </select><br><br>
-            <input type="submit" value="Submit" id="Submit" class="submitBtn">
+            <input type="submit" value="Submit" id="Submit" name="btnSubmit" class="submitBtn">
         </form>
       </div>
     </div>

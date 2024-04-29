@@ -10,6 +10,7 @@
 
     <cffunction name="onSessionStart" returnType="boolean" output="false">
         <cfset session.sessVar = {}>
+       
         <cfset session.userLoggedIn = false>
         <cfreturn true>
     </cffunction> 

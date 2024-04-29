@@ -5,7 +5,7 @@ component {
         local.checkUser = '';
         local.checkUser = createObject("component", "models/user").checkUserExist(local.strUsername,local.strRole);
         local.jsonResponse = {};
-
+ 
         if(local.checkUser) {
             local.jsonResponse["success"] = "true";
             local.jsonResponse["msg"] = "User with this username already exist";
