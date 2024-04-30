@@ -19,7 +19,8 @@
         <cfargument name="strPassword" required="true" type="string">
         <cfargument name="strRole" required="true" type="string">  
         <cfset local.encryptedPassword = Hash(#arguments.strPassword#, 'SHA-512')> 
-        <cfquery name="qryAddUser" dataSource="coldFusionDb" result="addNewUser">
+        <cftry>
+            <cfquery name="qryAddUser" dataSource="coldFusionDb" result="addNewUser">
             insert into UserTables (UserName,Password,Role,Name)
             values(
                 <cfqueryparam value="#arguments.strUsername#" cfsqltype="cf_sql_varchar">,
@@ -29,9 +30,13 @@
             )
         </cfquery> 
         <cfif addNewUser.recordCount>
-            <cfreturn true>
-        <cfelse>
-            <cfreturn false>
-        </cfif>
+                <cfreturn true>
+            <cfelse>
+                <cfreturn false>
+            </cfif>
+        <cfcatch type="exception">
+            <cfreturn "Unexpected error occurred!!!">
+        </cfcatch>
+        </cftry>
     </cffunction>
 </cfcomponent>

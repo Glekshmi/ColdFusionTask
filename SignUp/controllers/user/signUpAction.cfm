@@ -6,18 +6,16 @@ if(structKeyExists(form,"btnSubmit")){
     variables.validateUser = variables.objUser.validateUser(strPersonName=strPersonName,strUsername=strUsername,strPassword=strPassword,strConfirmPassword=strConfirmPassword,strRole=strRole);
     if(variables.validateUser.success){
         variables.checkUser = variables.objUser.checkUserExist(strUsername=strUsername,strRole=strRole);
-        variables.checkUserResult=deserializeJSON(variables.checkUser);
-        if(variables.checkUserResult.success){
-            variables.failedResult = variables.checkUserResult.msg;
+        if(variables.checkUser.success){
+            variables.failedResult = variables.checkUser.msg;
         }
         else{
             variables.addUser = variables.objUser.addUser(strPersonName=strPersonName,strUsername=strUsername,strPassword=strPassword,strConfirmPassword=strConfirmPassword,strRole=strRole);
-            variables.addUserResult=deserializeJSON(variables.addUser);
-            if(variables.addUserResult.success){
-                variables.successResult =  variables.addUserResult.msg;
+            if(variables.addUser.success){
+                variables.successResult =  variables.addUser.msg;
             }
             else{
-                variables.failedResult =  variables.addUserResult.msg;
+                variables.failedResult =  variables.addUser.msg;
             }
         }
     }

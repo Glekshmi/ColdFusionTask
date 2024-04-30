@@ -1,5 +1,5 @@
 component{
-    remote any function validateUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole) returnFormat="json"{
+    remote struct function validateUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole) {
         local.strPersonName = strPersonName;
         local.strUsername = strUsername;
         local.strPassword = strPassword;
@@ -33,7 +33,7 @@ component{
         }
         return local.response;
     }
-    remote string function checkUserExist(strUsername,strRole){
+    remote struct function checkUserExist(strUsername,strRole){
         local.strUsername = strUsername;
         local.strRole = strRole;
         local.checkUser = createObject("component", "models/user").checkUserExist(local.strUsername,local.strRole);
@@ -45,9 +45,9 @@ component{
             local.response["success"] = false;
             local.response["msg"] = "User with this username doesn't exist!!!";
         }
-        return serializeJSON(local.response);
+        return local.response;
     }
-    remote string function addUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole){
+    remote struct function addUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole){
         local.strPersonName = strPersonName;
         local.strUsername = strUsername;
         local.strPassword = strPassword;
@@ -62,6 +62,6 @@ component{
             local.response["success"] = false;
             local.response["msg"] = "Failed to complete registration!!!";
         }
-        return serializeJSON(local.response);
+        return local.response;
     }
 }
