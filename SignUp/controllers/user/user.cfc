@@ -55,7 +55,6 @@ component{
         local.strRole = strRole;
         local.addUser = createObject("component", "models/user").addUser(local.strPersonName,local.strUsername,local.strPassword,local.strConfirmPassword,local.strRole);
         local.response = {};
-        //writeDump(local.addUser)abort;
         if(local.addUser EQ "true") {
            
             local.response["success"] = true;
