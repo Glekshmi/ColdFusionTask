@@ -1,12 +1,10 @@
 component{
-    remote any function validateUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole) returnFormat="json"{
-      
+    remote struct function validateUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole) {
         local.strPersonName = strPersonName;
         local.strUsername = strUsername;
         local.strPassword = strPassword;
         local.strConfirmPassword = strConfirmPassword;
         local.strRole = strRole;
-
         local.errorMsg ='';
         if(len(local.strPersonName) EQ 0 || len(local.strUsername) EQ 0 || len(local.strPassword) EQ 0 || len(local.strConfirmPassword) EQ 0 || len(local.strRole) EQ 0){
             local.errorMsg &= "All fields are required!!!";
@@ -26,21 +24,16 @@ component{
         else if(local.strConfirmPassword NEQ local.strPassword){
             local.errorMsg &= "Password isn't matching!!!";
         }
-           
         local.response = {};
         if(len(local.errorMsg) EQ 0) {
             local.response["success"] = true;
-            local.response["msg"] = prepareMessage(msg=local.errorMsg,mode='success');
         } else {
             local.response["success"] = false;
-            local.response["msg"] = prepareMessage(msg=local.errorMsg);
-
+            local.response["msg"] = local.errorMsg;
         }
         return local.response;
     }
-
-    remote string function checkUserExist(strUsername,strRole){
-        
+    remote struct function checkUserExist(strUsername,strRole){
         local.strUsername = strUsername;
         local.strRole = strRole;
         local.checkUser = createObject("component", "models/user").checkUserExist(local.strUsername,local.strRole);
@@ -52,12 +45,9 @@ component{
             local.response["success"] = false;
             local.response["msg"] = "User with this username doesn't exist!!!";
         }
-        return serializeJSON(local.response);
-
+        return local.response;
     }
-
-    remote string function addUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole){
-       
+    remote struct function addUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole){
         local.strPersonName = strPersonName;
         local.strUsername = strUsername;
         local.strPassword = strPassword;
@@ -72,18 +62,6 @@ component{
             local.response["success"] = false;
             local.response["msg"] = "Failed to complete registration!!!";
         }
-        return serializeJSON(local.response);
-    }
-
-    remote string function prepareMessage(msg, mode){
-        switch(mode){
-            case 'success':
-                preparedMsg = '<p class="'&mode&'">'&arguments.msg&'</p>';
-            break;
-            default:
-                preparedMsg = '<p class="'&mode&'">'&arguments.msg&'</p>';
-            return preparedMsg;
-        }
-
+        return local.response;
     }
 }
