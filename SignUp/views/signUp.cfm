@@ -3,12 +3,11 @@
       <div class="header">
         <h1 class="fontColor">Registration</h1>
         <cfoutput>
-          <p id="pageSuccess" class="errorSection">#variables.result#</p>
-          
+          <p id="successMsg" class="successMsg">#variables.successResult#</p>
+          <p id="failedMsg" class="failedMsg">#variables.failedResult#</p>
         </cfoutput>
       </div>
       <div class="bodySection">
-      <cfoutput></cfoutput>
         <form action="?action=signUp" method="post">
             <label class="fontColor" >Enter your name</label>
             <input type="text" name="strPersonName" id="personName"><br><br>

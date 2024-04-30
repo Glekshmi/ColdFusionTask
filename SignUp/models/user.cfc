@@ -13,7 +13,6 @@
             <cfreturn false>
         </cfif>
     </cffunction>
-    
     <cffunction name="addUser" access="remote" returntype="boolean">
         <cfargument name="strPersonName" required="true" type="string">
         <cfargument name="strUsername" required="true" type="string">

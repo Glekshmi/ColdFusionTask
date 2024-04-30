@@ -62,3 +62,9 @@
 .failed{
     color:red;
 }
+.successMsg{
+    color:green;
+}
+.failedMsg{
+    color:red;
+}
