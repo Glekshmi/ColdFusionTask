@@ -55,12 +55,14 @@ component{
         local.strRole = strRole;
         local.addUser = createObject("component", "models/user").addUser(local.strPersonName,local.strUsername,local.strPassword,local.strConfirmPassword,local.strRole);
         local.response = {};
-        if(local.addUser) {
+        //writeDump(local.addUser)abort;
+        if(local.addUser EQ "true") {
+           
             local.response["success"] = true;
             local.response["msg"] = "Successfully completed registration!!!";
         } else {
             local.response["success"] = false;
-            local.response["msg"] = "Failed to complete registration!!!";
+            local.response["msg"] = "Unexpected error occurred!!!";
         }
         return local.response;
     }

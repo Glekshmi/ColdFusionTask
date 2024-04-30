@@ -49,7 +49,7 @@
     color: dimgrey;
     font-size: medium;
 }  
-.errorSection{
+.successMsg,.failedMsg{
     position: fixed;
     top:100px;
 }
