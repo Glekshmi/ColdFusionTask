@@ -47,20 +47,20 @@ component{
         }
         return local.response;
     }
-    remote struct function addUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole){
+    remote struct function addUser(strPersonName,strUsername,strPassword,strRole){
         local.strPersonName = strPersonName;
         local.strUsername = strUsername;
         local.strPassword = strPassword;
-        local.strConfirmPassword = strConfirmPassword;
         local.strRole = strRole;
-        local.addUser = createObject("component", "models/user").addUser(local.strPersonName,local.strUsername,local.strPassword,local.strConfirmPassword,local.strRole);
+        local.addUser = createObject("component", "models/user").addUser(local.strPersonName,local.strUsername,local.strPassword,local.strRole);
         local.response = {};
-        if(local.addUser) {
+        if(local.addUser EQ "true") {
+           
             local.response["success"] = true;
             local.response["msg"] = "Successfully completed registration!!!";
         } else {
             local.response["success"] = false;
-            local.response["msg"] = "Failed to complete registration!!!";
+            local.response["msg"] = "Unexpected error occurred!!!";
         }
         return local.response;
     }

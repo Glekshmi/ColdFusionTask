@@ -5,7 +5,6 @@
         <cfquery name="qryCheckUserExist" dataSource="coldFusionDb">
             select UserName,Role from UserTables
             where UserName = <cfqueryparam value="#arguments.strUsername#" cfsqltype="cf_sql_varchar"> 
-            AND Role = <cfqueryparam value="#arguments.strRole#" cfsqltype="cf_sql_varchar"> 
         </cfquery>   
         <cfif qryCheckUserExist.recordCount>
             <cfreturn true>
@@ -13,12 +12,13 @@
             <cfreturn false>
         </cfif>
     </cffunction>
-    <cffunction name="addUser" access="remote" returntype="boolean">
+    <cffunction name="addUser" access="remote" returntype="string">
         <cfargument name="strPersonName" required="true" type="string">
         <cfargument name="strUsername" required="true" type="string">
         <cfargument name="strPassword" required="true" type="string">
         <cfargument name="strRole" required="true" type="string">  
         <cfset local.encryptedPassword = Hash(#arguments.strPassword#, 'SHA-512')> 
+        <cfset local.success = ''>
         <cftry>
             <cfquery name="qryAddUser" dataSource="coldFusionDb" result="addNewUser">
             insert into UserTables (UserName,Password,Role,Name)
@@ -28,15 +28,14 @@
                 <cfqueryparam value="#arguments.strRole#" cfsqltype="cf_sql_varchar">,
                 <cfqueryparam value="#arguments.strPersonName#" cfsqltype="cf_sql_varchar">
             )
-        </cfquery> 
+        </cfquery>
         <cfif addNewUser.recordCount>
-                <cfreturn true>
-            <cfelse>
-                <cfreturn false>
-            </cfif>
-        <cfcatch type="exception">
-            <cfreturn "Unexpected error occurred!!!">
+            <cfset local.success = "true">
+        </cfif>
+        <cfcatch type="any"> 
+            <cfset local.success = "false">
         </cfcatch>
         </cftry>
+        <cfreturn local.success>
     </cffunction>
 </cfcomponent>
