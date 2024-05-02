@@ -5,7 +5,6 @@
         <cfquery name="qryCheckUserExist" dataSource="coldFusionDb">
             select UserName,Role from UserTables
             where UserName = <cfqueryparam value="#arguments.strUsername#" cfsqltype="cf_sql_varchar"> 
-            AND Role = <cfqueryparam value="#arguments.strRole#" cfsqltype="cf_sql_varchar"> 
         </cfquery>   
         <cfif qryCheckUserExist.recordCount>
             <cfreturn true>

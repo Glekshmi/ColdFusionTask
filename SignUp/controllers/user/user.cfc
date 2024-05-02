@@ -47,13 +47,12 @@ component{
         }
         return local.response;
     }
-    remote struct function addUser(strPersonName,strUsername,strPassword,strConfirmPassword,strRole){
+    remote struct function addUser(strPersonName,strUsername,strPassword,strRole){
         local.strPersonName = strPersonName;
         local.strUsername = strUsername;
         local.strPassword = strPassword;
-        local.strConfirmPassword = strConfirmPassword;
         local.strRole = strRole;
-        local.addUser = createObject("component", "models/user").addUser(local.strPersonName,local.strUsername,local.strPassword,local.strConfirmPassword,local.strRole);
+        local.addUser = createObject("component", "models/user").addUser(local.strPersonName,local.strUsername,local.strPassword,local.strRole);
         local.response = {};
         if(local.addUser EQ "true") {
            
